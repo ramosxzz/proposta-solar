@@ -26,6 +26,7 @@ test("gera um pacote de producao enxuto e completo", async () => {
     "src/app.js",
     "src/bill-parser.js",
     "src/document-reader.js",
+    "src/financial-projection.js",
     "src/irradiation.js",
     "src/layout.js",
     "src/proposal.js",
