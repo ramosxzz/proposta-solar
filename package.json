@@ -1,0 +1,11 @@
+{
+  "name": "gerador-proposta-solar",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "powershell -ExecutionPolicy Bypass -File ./scripts/start-app.ps1",
+    "build": "node scripts/build.mjs",
+    "test": "node --test"
+  }
+}

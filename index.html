@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17201d">
+  <title>Proposta Solar - Dimensionamento automático</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <section class="local-file-warning" id="local-file-warning" hidden role="alert">
+    <div>
+      <span class="warning-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5M12 17.5v.5"/></svg>
+      </span>
+      <p class="eyebrow">Abertura local bloqueada</p>
+      <h1>Abra pelo inicializador.</h1>
+      <p>O navegador não executa o leitor de PDF quando o arquivo <strong>index.html</strong> é aberto diretamente pela pasta.</p>
+      <div class="launcher-name">ABRIR-APP.bat</div>
+      <p class="warning-help">Feche esta aba e dê dois cliques nesse arquivo na mesma pasta.</p>
+    </div>
+  </section>
+  <script>
+    if (location.protocol === "file:") {
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("local-file-warning").hidden = false;
+        document.querySelector(".topbar").hidden = true;
+        document.querySelector(".app-shell").hidden = true;
+      });
+    }
+  </script>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Início">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
+      </span>
+      <span><strong>Proposta Solar</strong><small>dimensionamento automático</small></span>
+    </a>
+    <button class="button button-ghost" id="open-settings" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.86 2.86-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.55v-.1A1.7 1.7 0 0 0 8.5 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.86-2.86.06-.06A1.7 1.7 0 0 0 4.1 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H2.3V9.55h.1A1.7 1.7 0 0 0 4.1 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.06L6.56 3.7l.06.06A1.7 1.7 0 0 0 8.5 4.1a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1v-.1h4.05v.1A1.7 1.7 0 0 0 15 4.1a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.86 2.86-.06.06A1.7 1.7 0 0 0 19.4 8.5a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1.1.4h.1v4.05h-.1A1.7 1.7 0 0 0 19.4 15Z"/></svg>
+      Configurações
+    </button>
+  </header>
+
+  <main class="app-shell">
+    <aside class="workflow" aria-label="Etapas da proposta">
+      <p class="workflow-label">Fluxo da proposta</p>
+      <ol>
+        <li class="workflow-step is-active" data-step-indicator="upload"><span>01</span><div><strong>Conta de luz</strong><small>PDF, PNG ou JPG</small></div></li>
+        <li class="workflow-step" data-step-indicator="review"><span>02</span><div><strong>Conferência</strong><small>Dados e consumo</small></div></li>
+        <li class="workflow-step" data-step-indicator="result"><span>03</span><div><strong>Dimensionamento</strong><small>Sistema recomendado</small></div></li>
+        <li class="workflow-step" data-step-indicator="proposal"><span>04</span><div><strong>Proposta</strong><small>Prévia e PDF</small></div></li>
+      </ol>
+      <div class="privacy-note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <p><strong>Processamento privado</strong>A conta não fica armazenada.</p>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <section class="step-panel is-active" data-step="upload">
+        <div class="section-heading">
+          <p class="eyebrow">Comece pela conta do cliente</p>
+          <h1>Da fatura para uma proposta completa.</h1>
+          <p>O sistema lê consumo, endereço e tarifa. Você informa o módulo e o inversor; o restante é calculado.</p>
+        </div>
+
+        <label class="upload-zone" id="upload-zone" for="bill-file">
+          <input id="bill-file" type="file" accept="application/pdf,image/png,image/jpeg" hidden>
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 20h14a2 2 0 0 0 2-2v-3M3 15v3a2 2 0 0 0 2 2"/></svg>
+          </span>
+          <strong>Arraste a conta ou selecione o arquivo</strong>
+          <span>PDF, PNG ou JPG de até 15 MB</span>
+          <span class="upload-action">Selecionar conta</span>
+        </label>
+
+        <div class="processing" id="processing" hidden aria-live="polite">
+          <div class="processing-copy"><strong id="processing-title">Lendo a conta...</strong><span id="processing-detail">Preparando o documento</span></div>
+          <div class="progress-track"><span id="progress-bar"></span></div>
+          <div class="skeleton-lines"><i></i><i></i><i></i></div>
+        </div>
+        <div class="inline-alert error" id="upload-error" hidden role="alert"></div>
+      </section>
+
+      <section class="step-panel" data-step="review" hidden>
+        <div class="section-heading compact">
+          <p class="eyebrow">Revise antes de calcular</p>
+          <h2>Dados extraídos da conta</h2>
+          <p>Confira os campos destacados. Você pode corrigir qualquer informação.</p>
+        </div>
+        <div class="extraction-status" id="extraction-status"></div>
+        <form id="review-form">
+          <fieldset>
+            <legend>Cliente e instalação</legend>
+            <div class="form-grid">
+              <label class="field span-2"><span>Nome do cliente</span><input id="customer-name" required></label>
+              <label class="field span-2"><span>Endereço completo</span><input id="customer-address" required></label>
+              <label class="field"><span>Cidade</span><input id="customer-city" required></label>
+              <label class="field"><span>UF</span><input id="customer-state" maxlength="2" required></label>
+              <label class="field"><span>Distribuidora</span><input id="distributor"></label>
+              <label class="field"><span>Tipo de fornecimento</span><select id="supply-type" required><option value="Monofasico">Monofásico</option><option value="Bifasico">Bifásico</option><option value="Trifasico">Trifásico</option></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Leitura financeira e energética</legend>
+            <div class="form-grid">
+              <label class="field"><span>Valor total da conta</span><div class="input-prefix"><b>R$</b><input id="bill-total" type="number" step="0.01" required></div></label>
+              <label class="field"><span>Consumo atual</span><div class="input-suffix"><input id="current-consumption" type="number" step="1" required><b>kWh</b></div></label>
+              <label class="field"><span>Subtotal de energia</span><div class="input-prefix"><b>R$</b><input id="energy-subtotal" type="number" step="0.01" required></div></label>
+              <label class="field"><span>Iluminação pública</span><div class="input-prefix"><b>R$</b><input id="public-lighting" type="number" step="0.01"></div></label>
+            </div>
+            <p class="field-note">Iluminação pública, multas e débitos não entram no cálculo de economia.</p>
+          </fieldset>
+
+          <fieldset>
+            <div class="legend-row"><legend>Histórico de consumo</legend><span id="history-count"></span></div>
+            <div class="history-grid" id="history-grid"></div>
+          </fieldset>
+
+          <fieldset class="equipment-fieldset">
+            <legend>Equipamentos da proposta</legend>
+            <div class="form-grid">
+              <label class="field"><span>Potência de cada módulo</span><div class="input-suffix"><input id="module-power" type="number" min="100" value="550" required><b>Wp</b></div></label>
+              <label class="field"><span>Marca e modelo do inversor</span><input id="inverter-model" placeholder="Ex.: Deye SUN-6K-G" required></label>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button class="button button-ghost" id="back-upload" type="button">Trocar conta</button>
+            <button class="button button-primary" type="submit">Dimensionar sistema <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+          </div>
+          <div class="inline-alert error" id="review-error" hidden role="alert"></div>
+        </form>
+      </section>
+
+      <section class="step-panel" data-step="result" hidden>
+        <div class="section-heading compact result-heading">
+          <div><p class="eyebrow">Dimensionamento concluído</p><h2>Sistema recomendado</h2><p id="result-location"></p></div>
+          <span class="quality-badge">Cálculo técnico</span>
+        </div>
+        <div class="result-hero">
+          <div><span>Potência instalada</span><strong id="result-power">0,00 kWp</strong><small id="result-equipment"></small></div>
+          <div class="result-orbit" aria-hidden="true"><span></span><i></i></div>
+        </div>
+        <div class="metrics-grid">
+          <article><span>Média de consumo</span><strong id="result-average">0 kWh</strong><small>últimos 12 meses</small></article>
+          <article><span>Geração estimada</span><strong id="result-generation">0 kWh</strong><small>média mensal</small></article>
+          <article><span>Economia estimada</span><strong id="result-savings">R$ 0,00</strong><small>por mês</small></article>
+          <article><span>Retorno simples</span><strong id="result-payback">0 anos</strong><small>estimativa</small></article>
+        </div>
+        <div class="calculation-note" id="solar-source-note"></div>
+        <div class="form-actions">
+          <button class="button button-ghost" id="back-review" type="button">Revisar dados</button>
+          <button class="button button-primary" id="show-proposal" type="button">Ver proposta <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+        </div>
+      </section>
+
+      <section class="step-panel proposal-workspace" data-step="proposal" hidden>
+        <div class="proposal-toolbar">
+          <div><p class="eyebrow">Proposta pronta</p><h2>Prévia do documento</h2></div>
+          <div><button class="button button-ghost" id="back-result" type="button">Voltar</button><button class="button button-primary" id="download-pdf" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg> Baixar PDF</button></div>
+        </div>
+
+        <div class="document-viewport">
+          <div class="proposal-stage" id="proposal-stage">
+            <div class="proposal-document" id="proposal-document">
+            <article class="proposal-page proposal-cover">
+              <header class="document-header">
+                <div class="document-brand"><img id="proposal-logo" alt="" hidden><span id="proposal-brand-mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div>
+                <div><span>PROPOSTA</span><strong data-bind="proposalCode">000000</strong></div>
+              </header>
+              <section class="cover-title"><p>Sistema fotovoltaico conectado à rede</p><h1>Energia calculada para o seu consumo.</h1><div class="cover-client"><span>Preparado para</span><strong data-bind="customerName">Cliente</strong><small data-bind="address">Endereço</small></div></section>
+              <section class="cover-power"><div><span>Potência do sistema</span><strong><b data-bind-number="installedPowerKwp" data-digits="2">0,00</b> kWp</strong></div><div><span>Geração anual</span><strong><b data-bind-number="annualGenerationKwh" data-digits="0">0</b> kWh</strong></div></section>
+              <section class="cover-summary"><p>Uma solução dimensionada a partir do histórico real da unidade consumidora, da irradiação solar local e dos equipamentos selecionados.</p><dl><div><dt>Emissão</dt><dd data-bind="issuedAt">--/--/----</dd></div><div><dt>Validade</dt><dd data-bind="validUntil">--/--/----</dd></div></dl></section>
+              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Proposta técnico-comercial</span></footer>
+            </article>
+
+            <article class="proposal-page proposal-details">
+              <header class="document-header compact-header"><div class="document-brand"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div><div><span>ESTUDO</span><strong data-bind="proposalCode">000000</strong></div></header>
+              <section class="document-section"><p class="document-kicker">01 / Diagnóstico</p><h2>Consumo e oportunidade</h2><div class="document-metrics"><div><span>Conta atual</span><strong data-bind-currency="currentBill">R$ 0,00</strong></div><div><span>Média mensal</span><strong><b data-bind-number="averageConsumptionKwh" data-digits="0">0</b> kWh</strong></div><div><span>Geração mensal</span><strong><b data-bind-number="monthlyGenerationKwh" data-digits="0">0</b> kWh</strong></div></div><div class="document-chart" id="consumption-chart"></div></section>
+              <section class="document-section system-section"><p class="document-kicker">02 / Sistema</p><h2>Configuração recomendada</h2><div class="equipment-list"><div><span>Módulos fotovoltaicos</span><strong data-bind="moduleDescription">-- módulos</strong></div><div><span>Inversor solar</span><strong data-bind="inverterModel">--</strong></div><div><span>Potência instalada</span><strong><b data-bind-number="installedPowerKwp" data-digits="2">0,00</b> kWp</strong></div></div></section>
+              <section class="document-section generation-section"><p class="document-kicker">03 / Geração</p><div class="generation-heading"><h2>Produção estimada por mês</h2><span><b data-bind-number="irradiationAnnual" data-digits="3">0,000</b> h/dia</span></div><div class="generation-chart" id="generation-chart"></div></section>
+              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Página 2 de 3</span></footer>
+            </article>
+
+            <article class="proposal-page proposal-commercial">
+              <header class="document-header compact-header"><div class="document-brand"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div><div><span>CONDIÇÕES</span><strong data-bind="proposalCode">000000</strong></div></header>
+              <section class="commercial-hero"><p class="document-kicker">04 / Investimento</p><h2>Seu projeto solar completo</h2><div class="investment-box"><span>Investimento à vista</span><strong data-bind-currency="investment">R$ 0,00</strong><small>Equipamentos, projeto, instalação e homologação*</small></div></section>
+              <section class="return-grid"><div><span>Economia anual estimada</span><strong data-bind-currency="annualSavings">R$ 0,00</strong></div><div><span>Retorno simples</span><strong><b data-bind-number="paybackYears" data-digits="1">0,0</b> anos</strong></div><div><span>Geração em 12 meses</span><strong><b data-bind-number="annualGenerationKwh" data-digits="0">0</b> kWh</strong></div></section>
+              <section class="document-section terms"><h2>Premissas da proposta</h2><ul><li>Estimativa baseada no histórico disponível na conta e na irradiação média do município.</li><li>A economia real varia com clima, consumo, tarifa, orientação, sombreamento e regras da distribuidora.</li><li>Iluminação pública, custo de disponibilidade, multas, juros e outros serviços permanecem faturáveis.</li><li>*Escopo final sujeito à vistoria técnica do local e confirmação das condições de instalação.</li></ul></section>
+              <section class="signature-area"><div><span></span><strong data-bind="responsibleName">Responsável</strong><small data-bind="phone">Telefone</small><small data-bind="email"></small></div><div><span></span><strong data-bind="customerName">Cliente</strong><small>De acordo com a proposta</small></div></section>
+              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Página 3 de 3</span></footer>
+            </article>
+            </div>
+          </div>
+        </div>
+        <div class="inline-alert error" id="pdf-error" hidden role="alert"></div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Proposta Solar</span>
+    <span>Desenvolvido por <strong>Matheus Ramos</strong> - <a href="tel:+5551989849699">51989849699</a></span>
+  </footer>
+
+  <dialog id="settings-dialog">
+    <form method="dialog" id="settings-form">
+      <header><div><p class="eyebrow">Configuração única</p><h2>Dados do integrador</h2></div><button class="icon-button" value="cancel" aria-label="Fechar" type="submit"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+      <div class="dialog-body form-grid">
+        <label class="field span-2"><span>Nome da empresa</span><input id="setting-company" required></label>
+        <label class="field"><span>Responsável</span><input id="setting-responsible" required></label>
+        <label class="field"><span>Telefone</span><input id="setting-phone" required></label>
+        <label class="field span-2"><span>E-mail</span><input id="setting-email" type="email"></label>
+        <label class="field"><span>Preço instalado por Wp</span><div class="input-prefix"><b>R$</b><input id="setting-price" type="number" min="0.01" step="0.01" required></div></label>
+        <label class="field"><span>Performance do sistema</span><div class="input-suffix"><input id="setting-pr" type="number" min="0.5" max="1" step="0.01" required><b>PR</b></div></label>
+        <label class="field span-2"><span>Logotipo</span><input id="setting-logo" type="file" accept="image/png,image/jpeg,image/svg+xml"><small>Opcional. PNG, JPG ou SVG.</small></label>
+      </div>
+      <footer><button class="button button-ghost" value="cancel" type="submit">Cancelar</button><button class="button button-primary" id="save-settings" value="default" type="submit">Salvar configurações</button></footer>
+    </form>
+  </dialog>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
