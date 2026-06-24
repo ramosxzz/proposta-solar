@@ -1,3 +1,5 @@
+import { createFinancialProjection } from "./financial-projection.js";
+
 const MONTH_LABELS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 const MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -24,6 +26,14 @@ export function createProposalModel({ bill, system, settings, inverterModel, irr
     .slice(0, 4)
     .toUpperCase();
   const dateCode = issuedAt.toISOString().slice(0, 10).replace(/-/g, "");
+  const annualTariffEscalation = 0.05;
+  const annualGenerationDegradation = 0.005;
+  const financialProjection = createFinancialProjection({
+    annualSavings: system.annualSavings,
+    investment: system.investment,
+    annualTariffEscalation,
+    annualGenerationDegradation,
+  });
 
   return {
     proposalCode: `${dateCode}-${customerCode || "SOLAR"}`,
@@ -44,6 +54,10 @@ export function createProposalModel({ bill, system, settings, inverterModel, irr
     monthlySavings: system.monthlySavings,
     annualSavings: system.annualSavings,
     paybackYears: system.paybackYears,
+    financialProjection,
+    annualTariffEscalation,
+    annualGenerationDegradation,
+    referenceLifetimeYears: 25,
     irradiationAnnual: irradiation.annual,
     monthlyProjection,
     companyName: settings.companyName,

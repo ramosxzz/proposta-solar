@@ -37,6 +37,12 @@ test("cria modelo de proposta sem copiar identificadores sensiveis", () => {
   assert.equal(model.moduleDescription, "11 módulos de 550 Wp");
   assert.equal(model.inverterModel, "Deye 6 kW");
   assert.equal(model.monthlyProjection.length, 12);
+  assert.equal(model.financialProjection.rows.length, 20);
+  assert.equal(model.financialProjection.paybackYear, 3);
+  assert.ok(model.financialProjection.totalSavings > model.annualSavings * 20);
+  assert.equal(model.annualTariffEscalation, 0.05);
+  assert.equal(model.annualGenerationDegradation, 0.005);
+  assert.equal(model.referenceLifetimeYears, 25);
   assert.equal("cpf" in model, false);
   assert.equal("publicLighting" in model, false);
 });
