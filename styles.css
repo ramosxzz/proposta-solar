@@ -259,6 +259,77 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 .signature-area strong { font-size: 10px; }
 .signature-area small { margin-top: 3px; color: #777f7c; font-size: 8px; }
 
+.benefits-intro { padding: 45px 0 28px; }
+.benefits-intro h2, .on-grid-heading h2, .projection-header h2 { margin: 0; font-size: 31px; line-height: 1; letter-spacing: -.05em; }
+.benefits-grid { display: grid; grid-template-columns: 1.18fr 1fr 1fr; gap: 10px; margin-top: 25px; }
+.benefit-card { min-height: 154px; display: flex; flex-direction: column; justify-content: space-between; padding: 17px; border: 1px solid #dadbd6; background: #f6f6f2; }
+.benefit-card:first-child { background: var(--ink); color: white; border-color: var(--ink); }
+.benefit-icon { width: 33px; height: 33px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; color: var(--accent); }
+.benefit-card:first-child .benefit-icon { color: #f1a06f; }
+.benefit-icon svg { width: 17px; }
+.benefit-card div > span, .benefit-card strong, .benefit-card small { display: block; }
+.benefit-card div > span { color: #747c78; font-size: 7.5px; text-transform: uppercase; letter-spacing: .08em; }
+.benefit-card:first-child div > span, .benefit-card:first-child small { color: #b7c0bc; }
+.benefit-card strong { margin: 6px 0; font-size: 14px; line-height: 1.05; letter-spacing: -.03em; }
+.benefit-card small { color: #69716d; font-size: 7.5px; line-height: 1.4; }
+
+.on-grid-section { padding-top: 29px; border-top: 1px solid #d6d8d4; }
+.on-grid-heading { display: grid; grid-template-columns: 1.45fr 1fr; align-items: end; gap: 40px; }
+.on-grid-heading > p { margin: 0; color: #68716d; font-size: 9px; line-height: 1.5; }
+.on-grid-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 25px 0 18px; padding: 0; list-style: none; border-top: 1px solid #d8dad5; border-bottom: 1px solid #d8dad5; }
+.on-grid-flow li { min-height: 102px; display: grid; grid-template-columns: 23px 1fr; gap: 8px; padding: 14px 10px; border-right: 1px solid #d8dad5; }
+.on-grid-flow li:first-child { padding-left: 0; }
+.on-grid-flow li:last-child { padding-right: 0; border-right: 0; }
+.on-grid-flow li > span { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--accent); font: 600 6.5px "Geist Mono", monospace; }
+.on-grid-flow p, .on-grid-flow strong { display: block; }
+.on-grid-flow p { margin: 1px 0 0; color: #626b67; font-size: 7.5px; line-height: 1.45; }
+.on-grid-flow strong { margin-bottom: 4px; color: var(--ink); font-size: 8.5px; }
+.on-grid-diagram { height: 278px; display: grid; place-items: center; padding: 8px 24px; background: #f0f0eb; overflow: hidden; }
+.on-grid-diagram svg { width: 100%; height: 100%; }
+.on-grid-diagram text { fill: #56605c; stroke: none; font: 600 7px "Geist Mono", monospace; letter-spacing: .04em; }
+.diagram-sun { fill: #f4c36f; stroke: none; }
+.diagram-sun-rays, .diagram-roof, .diagram-panels, .diagram-flow, .diagram-load { fill: none; stroke: var(--accent); stroke-width: 2; }
+.diagram-house { fill: #fff; stroke: #9ca29f; stroke-width: 1.4; }
+.diagram-panels { fill: #17201d; stroke: #fff; stroke-width: 1; }
+.diagram-device { fill: #fff; stroke: var(--accent); stroke-width: 1.5; }
+.diagram-meter { fill: #fff; stroke: #58615d; stroke-width: 1.5; }
+.diagram-grid { fill: none; stroke: #58615d; stroke-width: 1.5; }
+.diagram-flow { stroke-width: 2.4; stroke-dasharray: 5 4; }
+.diagram-return { stroke: #7c8782; }
+.diagram-load { stroke: #7c8782; stroke-width: 1.5; }
+
+.projection-header { display: grid; grid-template-columns: 1.25fr .85fr; gap: 35px; align-items: end; padding: 46px 0 28px; }
+.projection-header > div:first-child > p:last-child { margin: 13px 0 0; color: #68716d; font-size: 10px; line-height: 1.5; }
+.projection-investment { padding: 20px; color: white; background: var(--ink); }
+.projection-investment span, .projection-investment strong, .projection-investment small { display: block; }
+.projection-investment span { color: #b9c1be; font-size: 8px; }
+.projection-investment strong { margin: 8px 0; font: 600 24px "Geist Mono", monospace; letter-spacing: -.04em; }
+.projection-investment small { color: #b9c1be; font-size: 7px; }
+.projection-investment small b { color: white; }
+.projection-summary { display: grid; grid-template-columns: 1.55fr .8fr; border-top: 1px solid #d5d7d2; border-bottom: 1px solid #d5d7d2; }
+.projection-summary > div { padding: 18px 19px; }
+.projection-summary > div:first-child { padding-left: 0; border-right: 1px solid #d5d7d2; }
+.projection-summary span, .projection-summary strong, .projection-summary small { display: block; }
+.projection-summary span { color: #737b77; font-size: 7.5px; }
+.projection-summary strong { margin: 5px 0; font: 600 19px "Geist Mono", monospace; }
+.projection-summary small { color: #737b77; font-size: 7px; }
+.projection-total strong { color: var(--accent-dark); font-size: 26px; letter-spacing: -.05em; }
+.projection-table-section { padding-top: 26px; }
+.projection-table-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 11px; }
+.projection-table-heading h3 { margin: 0; font-size: 15px; letter-spacing: -.03em; }
+.projection-table-heading span { color: #747c78; font: 600 7px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .08em; }
+.projection-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 7.4px; }
+.projection-table th { padding: 8px 9px; color: white; background: var(--ink); text-align: right; font: 600 6.8px "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .04em; }
+.projection-table th:first-child, .projection-table td:first-child { text-align: left; }
+.projection-table td { height: 22px; padding: 4px 9px; border-bottom: 1px solid #e0e1dd; color: #59625e; text-align: right; font-family: "Geist Mono", monospace; }
+.projection-table tbody tr:nth-child(even) td { background: #f5f5f1; }
+.projection-table tbody tr.is-payback-year td { color: #235a45; background: #e3eee8; font-weight: 600; }
+.projection-table tbody tr.is-payback-year td:first-child::after { content: " retorno"; margin-left: 5px; color: #326b55; font: 600 5.5px "Geist Mono", monospace; text-transform: uppercase; }
+.projection-notes { margin-top: 20px; padding: 14px 16px; border-left: 2px solid var(--accent); background: #f3f2ed; }
+.projection-notes strong { display: block; font-size: 8px; }
+.projection-notes p { margin: 5px 0; color: #535d58; font: 600 7px/1.4 "Geist Mono", monospace; }
+.projection-notes small { display: block; color: #717975; font-size: 6.5px; line-height: 1.4; }
+
 .site-footer { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 20px clamp(20px, 5vw, 70px); border-top: 1px solid var(--line); color: var(--ink-soft); background: var(--paper); font-size: 12px; }
 .site-footer > span:first-child { color: var(--ink); font-weight: 650; }
 .site-footer a { color: var(--accent-dark); font-weight: 650; text-decoration: none; }
