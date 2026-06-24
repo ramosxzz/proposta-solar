@@ -229,7 +229,39 @@ function renderProposal() {
 
   renderConsumptionChart();
   renderGenerationChart();
+  renderFinancialProjection();
   fitProposalPreview();
+}
+
+function renderFinancialProjection() {
+  const { financialProjection } = state.proposal;
+  const tableBody = $("#financial-projection-body");
+  tableBody.replaceChildren();
+
+  for (const row of financialProjection.rows) {
+    const rowElement = document.createElement("tr");
+    if (row.year === financialProjection.paybackYear) {
+      rowElement.classList.add("is-payback-year");
+    }
+
+    const values = [
+      `${row.year}º ano`,
+      formatCurrency(row.annualSavings),
+      formatCurrency(row.accumulatedSavings),
+      formatCurrency(row.balance),
+    ];
+    for (const value of values) {
+      const cell = document.createElement("td");
+      cell.textContent = value;
+      rowElement.append(cell);
+    }
+    tableBody.append(rowElement);
+  }
+
+  $("#projection-total-savings").textContent = formatCurrency(financialProjection.totalSavings);
+  $("#projection-payback-year").textContent = financialProjection.paybackYear
+    ? `${financialProjection.paybackYear}º ano`
+    : "Acima de 20 anos";
 }
 
 function renderConsumptionChart() {

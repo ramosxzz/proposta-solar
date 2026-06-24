@@ -28,3 +28,14 @@ test("inclui cinco paginas com funcionamento on-grid e projecao financeira", asy
   assert.match(html, /0,5% ao ano/);
   assert.match(html, /Página 5 de 5/);
 });
+
+test("renderiza vinte anos e destaca o retorno projetado", async () => {
+  const app = await readFile(new URL("../src/app.js", import.meta.url), "utf8");
+
+  assert.match(app, /function renderFinancialProjection/);
+  assert.match(app, /financialProjection\.rows/);
+  assert.match(app, /is-payback-year/);
+  assert.match(app, /Acima de 20 anos/);
+  assert.match(app, /projection-total-savings/);
+  assert.match(app, /formatCurrency/);
+});
