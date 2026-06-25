@@ -66,7 +66,9 @@ export function parseInverterKw(model) {
 export function calculateSystem(input) {
   const monthlyConsumption = requirePositive(input.monthlyConsumption, "Consumo medio");
   const irradiation = requirePositive(input.irradiation, "Irradiacao");
-  const performanceRatio = DEFAULT_PERFORMANCE_RATIO;
+  const performanceRatio = Number.isFinite(Number(input.performanceRatio)) && Number(input.performanceRatio) > 0
+    ? Number(input.performanceRatio)
+    : DEFAULT_PERFORMANCE_RATIO;
   const modulePowerWp = requirePositive(input.modulePowerWp, "Potencia do modulo");
   const effectiveTariff = requirePositive(input.effectiveTariff, "Tarifa efetiva");
   const inverterKw = parseInverterKw(input.inverterModel ?? "");
@@ -78,7 +80,9 @@ export function calculateSystem(input) {
   const cappedPowerKwp = Math.min(requiredPowerKwp, maxKwp);
   const moduleCount = Math.max(1, Math.ceil((cappedPowerKwp * 1000) / modulePowerWp));
   const installedPowerKwp = (moduleCount * modulePowerWp) / 1000;
-  const pricePerWp = getPricePerWp(installedPowerKwp);
+  const pricePerWp = Number.isFinite(Number(input.pricePerWp)) && Number(input.pricePerWp) > 0
+    ? Number(input.pricePerWp)
+    : getPricePerWp(installedPowerKwp);
   const monthlyGenerationKwh = installedPowerKwp * irradiation * 30 * performanceRatio;
   const annualGenerationKwh = monthlyGenerationKwh * 12;
   const investment = installedPowerKwp * 1000 * pricePerWp;

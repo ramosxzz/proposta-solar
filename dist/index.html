@@ -131,6 +131,8 @@
             <div class="form-grid">
               <label class="field"><span>Potência de cada módulo</span><div class="input-suffix"><input id="module-power" type="number" min="100" value="550" required><b>Wp</b></div></label>
               <label class="field"><span>Marca e modelo do inversor</span><input id="inverter-model" placeholder="Ex.: Deye SUN-6K-G" required></label>
+              <label class="field"><span>Garantia dos módulos</span><div class="input-suffix"><input id="module-warranty" type="number" min="1" value="25" required><b>anos</b></div></label>
+              <label class="field"><span>Garantia do inversor</span><div class="input-suffix"><input id="inverter-warranty" type="number" min="1" value="5" required><b>anos</b></div></label>
             </div>
           </fieldset>
 
@@ -173,53 +175,38 @@
         <div class="document-viewport">
           <div class="proposal-stage" id="proposal-stage">
             <div class="proposal-document" id="proposal-document">
-            <article class="proposal-page proposal-cover">
-              <header class="document-header">
-                <div class="document-brand"><span id="proposal-brand-mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div>
-                <div><span>PROPOSTA</span><strong data-bind="proposalCode">000000</strong></div>
-              </header>
-              <section class="cover-brand"><img id="proposal-logo" class="cover-logo" alt="" hidden><strong class="cover-company-name" data-bind="companyName">Energia Solar</strong></section>
-              <section class="cover-title"><p>Sistema fotovoltaico conectado à rede</p><h1>Energia calculada para o seu consumo.</h1><div class="cover-client"><span>Preparado para</span><strong data-bind="customerName">Cliente</strong><small data-bind="address">Endereço</small></div></section>
-              <section class="cover-power"><div><span>Potência do sistema</span><strong><b data-bind-number="installedPowerKwp" data-digits="2">0,00</b> kWp</strong></div><div><span>Geração anual</span><strong><b data-bind-number="annualGenerationKwh" data-digits="0">0</b> kWh</strong></div></section>
-              <section class="cover-summary"><p>Uma solução dimensionada a partir do histórico real da unidade consumidora, da irradiação solar local e dos equipamentos selecionados.</p><dl><div><dt>Emissão</dt><dd data-bind="issuedAt">--/--/----</dd></div><div><dt>Validade</dt><dd data-bind="validUntil">--/--/----</dd></div></dl></section>
-              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Proposta técnico-comercial</span></footer>
-            </article>
-
-            <article class="proposal-page proposal-details">
-              <header class="document-header compact-header"><div class="document-brand"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div><div><span>ESTUDO</span><strong data-bind="proposalCode">000000</strong></div></header>
-              <section class="document-section"><p class="document-kicker">01 / Diagnóstico</p><h2>Consumo e oportunidade</h2><div class="document-metrics"><div><span>Conta atual</span><strong data-bind-currency="currentBill">R$ 0,00</strong></div><div><span>Média mensal</span><strong><b data-bind-number="averageConsumptionKwh" data-digits="0">0</b> kWh</strong></div><div><span>Geração mensal</span><strong><b data-bind-number="monthlyGenerationKwh" data-digits="0">0</b> kWh</strong></div></div><div class="document-chart" id="consumption-chart"></div></section>
-              <section class="document-section system-section"><p class="document-kicker">02 / Sistema</p><h2>Configuração recomendada</h2><div class="equipment-list"><div><span>Módulos fotovoltaicos</span><strong data-bind="moduleDescription">-- módulos</strong></div><div><span>Inversor solar</span><strong data-bind="inverterModel">--</strong></div><div><span>Potência instalada</span><strong><b data-bind-number="installedPowerKwp" data-digits="2">0,00</b> kWp</strong></div></div></section>
-              <section class="document-section generation-section"><p class="document-kicker">03 / Geração</p><div class="generation-heading"><h2>Produção estimada por mês</h2><span><b data-bind-number="irradiationAnnual" data-digits="3">0,000</b> h/dia</span></div><div class="generation-chart" id="generation-chart"></div></section>
-              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Página 2 de 5</span></footer>
-            </article>
-
-            <article class="proposal-page proposal-commercial">
-              <header class="document-header compact-header"><div class="document-brand"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div><div><span>CONDIÇÕES</span><strong data-bind="proposalCode">000000</strong></div></header>
-              <section class="commercial-hero"><p class="document-kicker">04 / Investimento</p><h2>Seu projeto solar completo</h2><div class="investment-box"><span>Investimento à vista</span><strong data-bind-currency="investment">R$ 0,00</strong><small>Equipamentos, projeto, instalação e homologação*</small></div></section>
-              <section class="return-grid"><div><span>Economia anual estimada</span><strong data-bind-currency="annualSavings">R$ 0,00</strong></div><div><span>Retorno simples</span><strong><b data-bind-number="paybackYears" data-digits="1">0,0</b> anos</strong></div><div><span>Geração em 12 meses</span><strong><b data-bind-number="annualGenerationKwh" data-digits="0">0</b> kWh</strong></div></section>
-              <section class="document-section terms"><h2>Premissas da proposta</h2><ul><li>Estimativa baseada no histórico disponível na conta e na irradiação média do município.</li><li>A economia real varia com clima, consumo, tarifa, orientação, sombreamento e regras da distribuidora.</li><li>Iluminação pública, custo de disponibilidade, multas, juros e outros serviços permanecem faturáveis.</li><li>*Escopo final sujeito à vistoria técnica do local e confirmação das condições de instalação.</li></ul></section>
-              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Página 3 de 5</span></footer>
-            </article>
-
-            <article class="proposal-page proposal-benefits">
-              <header class="document-header compact-header"><div class="document-brand"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div><div><span>ENTENDA O SISTEMA</span><strong data-bind="proposalCode">000000</strong></div></header>
-              <section class="benefits-intro">
-                <p class="document-kicker">05 / Benefícios</p>
-                <h2>Energia que trabalha para o imóvel.</h2>
-                <div class="benefits-grid">
-                  <article class="benefit-card benefit-lifetime"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 6.5 12 3l5 3.5M7 17.5 12 21l5-3.5"/><path d="M5 9h14M5 15h14"/></svg></span><div><span>Vida útil de referência</span><strong><b data-bind-number="referenceLifetimeYears" data-digits="0">25</b>+ anos</strong><small>Módulos projetados para geração de longo prazo.</small></div></article>
-                  <article class="benefit-card"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M4 18h16M6 15l4-4 3 2 5-6"/><path d="M15 7h3v3"/></svg></span><div><span>Retorno calculado</span><strong><b data-bind-number="paybackYears" data-digits="1">0,0</b> anos</strong><small>Estimativa baseada nesta unidade consumidora.</small></div></article>
-                  <article class="benefit-card"><span class="benefit-icon"><svg viewBox="0 0 24 24"><path d="m3 11 9-7 9 7v9H3Z"/><path d="M9 20v-6h6v6M7 10h10"/></svg></span><div><span>Valor para o imóvel</span><strong>Menor custo recorrente</strong><small>A eficiência energética pode aumentar a atratividade do imóvel.</small></div></article>
-                </div>
+            <article class="proposal-page reference-cover">
+              <div class="cover-waves" aria-hidden="true"></div>
+              <section class="reference-logo"><img id="proposal-logo" class="cover-logo" alt="" hidden><span id="proposal-brand-mark" class="hv-mark">HV</span></section>
+              <section class="reference-cover-title" aria-label="PROPOSTA COMERCIAL ENERGIA SOLAR">
+                <p>PROPOSTA</p>
+                <h1>COMERCIAL</h1>
+                <h2>ENERGIA SOLAR</h2>
+                <div class="solar-rule" aria-hidden="true"><span></span><i></i><span></span></div>
               </section>
-              <section class="on-grid-section">
-                <div class="on-grid-heading"><div><p class="document-kicker">06 / Funcionamento</p><h2>Como funciona o sistema on-grid</h2></div><p>A geração solar e a rede trabalham juntas, automaticamente, ao longo do dia.</p></div>
-                <ol class="on-grid-flow">
-                  <li><span>01</span><p><strong>Captação</strong>Os módulos recebem a radiação solar e geram energia em corrente contínua.</p></li>
-                  <li><span>02</span><p><strong>Conversão e consumo</strong>O inversor converte a energia e alimenta os equipamentos do imóvel.</p></li>
-                  <li><span>03</span><p><strong>Compensação</strong>O excedente passa pelo medidor bidirecional e segue para a rede.</p></li>
-                  <li><span>04</span><p><strong>Complemento da rede</strong>Quando necessário, a concessionária fornece energia automaticamente.</p></li>
-                </ol>
+              <section class="cover-client-reference">
+                <strong data-bind="customerName">Cliente</strong>
+                <span>Vendedor: <b data-bind="responsibleName">Responsável</b></span>
+                <span>Data: <b data-bind="issuedAt">--/--/----</b></span>
+              </section>
+            </article>
+
+            <article class="proposal-page reference-page benefits-page">
+              <div class="page-rail"></div>
+              <header class="reference-header"><div><strong data-bind="companyName">HV Energias Renováveis</strong><span></span></div><i class="hv-mark small">HV</i></header>
+              <section class="reference-benefits">
+                <article><span class="benefit-pictogram shield"></span><strong>Vida útil longa</strong><p>Um painel solar tem vida útil de no <b>mínimo <span data-bind="moduleWarrantyLabel">25 anos</span>.</b></p></article>
+                <article><span class="benefit-pictogram coin"></span><strong>Payback curto</strong><p>Uma usina de energia solar costuma <b>se pagar entre 2 a 5 anos.</b></p></article>
+                <article><span class="benefit-pictogram house"></span><strong>Valorização do imóvel</strong><p>O valor do imóvel é maior pela <b>economia na conta de energia</b></p></article>
+              </section>
+              <h2 class="black-banner" aria-label="FUNCIONAMENTO DO SISTEMA FOTOVOLTAICO ON-GRID">FUNCIONAMENTO DO<br>SISTEMA FOTOVOLTAICO ON-GRID</h2>
+              <ol class="reference-flow">
+                <li><span>1</span><p>A energia solar é captada pelos módulos fotovoltaicos no seu telhado;</p></li>
+                <li><span>2</span><p>A energia gerada é convertida pelo inversor e utilizada para alimentar os equipamentos da residência.</p></li>
+                <li><span>3</span><p>Quando a produção de energia é maior que o consumo da casa, o excedente é injetado na rede da concessionária através do medidor bidirecional.</p></li>
+                <li><span>4</span><p>Quando a geração solar não é suficiente, a energia necessária é automaticamente fornecida pela rede elétrica da concessionária.</p></li>
+              </ol>
+              <section class="reference-house-wrap">
                 <div class="on-grid-diagram" id="on-grid-diagram" role="img" aria-label="Fluxo do sistema solar on-grid entre módulos, inversor, imóvel, medidor e rede">
                   <svg viewBox="0 0 650 245" aria-hidden="true">
                     <defs><marker id="flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#cf6b38" stroke="none"/></marker></defs>
@@ -236,33 +223,102 @@
                   </svg>
                 </div>
               </section>
-              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Página 4 de 5</span></footer>
+              <footer class="reference-footer">Página 2 de 6</footer>
             </article>
 
-            <article class="proposal-page proposal-projection">
-              <header class="document-header compact-header"><div class="document-brand"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><strong data-bind="companyName">Energia Solar</strong></div><div><span>RETORNO</span><strong data-bind="proposalCode">000000</strong></div></header>
-              <section class="projection-header">
-                <div><p class="document-kicker">07 / Investimento</p><h2>Projeção financeira de 20 anos</h2><p>Uma visão anual do retorno estimado para o sistema dimensionado.</p></div>
-                <div class="projection-investment"><span>Investimento à vista</span><strong data-bind-currency="investment">R$ 0,00</strong><small>Proposta emitida em <b data-bind="issuedAt">--/--/----</b></small></div>
+            <article class="proposal-page reference-page system-page">
+              <div class="page-rail"></div>
+              <header class="reference-header"><div><strong data-bind="companyName">HV Energias Renováveis</strong><span></span></div><i class="hv-mark small">HV</i></header>
+              <h2 class="system-title">SEU SISTEMA</h2>
+              <section class="equipment-table-reference">
+                <div>ITEM</div><div>MODELO</div><div>QUANTIDADE</div>
+                <strong>MÓDULOS<br>INVERSOR(ES)</strong>
+                <strong><b><span data-bind-number="modulePowerWp" data-digits="0">0</span> Wp</b><b data-bind="inverterModel">Inversor</b></strong>
+                <strong><b data-bind-number="moduleCount" data-digits="0">0</b><b data-bind-number="inverterCount" data-digits="0">1</b></strong>
               </section>
-              <section class="projection-summary">
-                <div class="projection-total"><span>Economia acumulada em 20 anos</span><strong id="projection-total-savings">R$ 0,00</strong><small>Reajuste e degradação considerados ano a ano.</small></div>
-                <div><span>Retorno projetado</span><strong id="projection-payback-year">--</strong><small>Primeiro ano com saldo acumulado positivo.</small></div>
+              <section class="system-body-reference">
+                <dl>
+                  <div><dt>Modo de operação:</dt><dd>On-grid</dd></div>
+                  <div><dt>Potência do sistema:</dt><dd><span data-bind-number="installedPowerKwp" data-digits="2">0</span> kWp</dd></div>
+                  <div><dt>Área dos painéis:</dt><dd><span data-bind-number="panelAreaM2" data-digits="2">0</span> m²</dd></div>
+                  <div><dt>Eficiência dos painéis:</dt><dd><span data-bind-number="panelEfficiencyPercent" data-digits="1">21,4</span> %</dd></div>
+                  <div><dt>Vida útil dos painéis:</dt><dd><span data-bind="moduleWarrantyLabel">25 anos</span></dd></div>
+                  <div><dt>Garantia dos módulos:</dt><dd><span data-bind="moduleWarrantyLabel">25 anos</span></dd></div>
+                  <div><dt>Garantia do inversor:</dt><dd><span data-bind="inverterWarrantyLabel">5 anos</span></dd></div>
+                  <div><dt>Seu consumo de energia anual:</dt><dd><span data-bind-number="annualConsumptionKwh" data-digits="0">0</span> kWh</dd></div>
+                  <div><dt>Orientação Solar:</dt><dd>Norte e Oeste</dd></div>
+                  <br>
+                  <div><dt>Seu consumo de energia mensal:</dt><dd><span data-bind-number="averageConsumptionKwh" data-digits="0">0</span> kWh</dd></div>
+                  <div><dt>Geração média mensal estimada:</dt><dd><span data-bind-number="monthlyGenerationKwh" data-digits="0">0</span> kWh</dd></div>
+                  <div><dt>Percentual de energia solar:</dt><dd><span data-bind-number="solarCoveragePercent" data-digits="1">0</span> %</dd></div>
+                </dl>
+                <div class="satellite-card"><svg viewBox="0 0 220 190" aria-hidden="true"><rect x="10" y="10" width="200" height="170" rx="14"/><path d="M20 128 82 78l38 30 72-68"/><path d="M42 42h42v42H42zM132 112h48v40h-48z"/></svg></div>
               </section>
-              <section class="projection-table-section">
-                <div class="projection-table-heading"><h3>Evolução do investimento</h3><span>Valores estimados</span></div>
+              <section class="comparison-section">
+                <h3>Gráfico de <b>geração</b> e <strong>Consumo</strong> mensal [kWh]</h3>
+                <div class="system-comparison-chart" id="system-comparison-chart"></div>
+              </section>
+              <footer class="reference-footer">Página 3 de 6</footer>
+            </article>
+
+            <article class="proposal-page reference-page self-pay-page">
+              <div class="page-rail"></div>
+              <header class="reference-header"><div><strong data-bind="companyName">HV Energias Renováveis</strong><span></span></div><i class="hv-mark small">HV</i></header>
+              <section class="self-pay-copy">
+                <h2 aria-label="Investimento que se Paga">Investimento<br>que se Paga</h2>
+                <p>Em poucos anos sua economia<br>cobre todo o valor investido</p>
+              </section>
+              <div class="year-one-saving">Economia Ano 1<br><strong data-bind-currency="annualSavings">R$ 0,00</strong></div>
+              <svg class="investment-curve" id="investment-curve" viewBox="0 0 480 380" aria-hidden="true">
+                <path class="curve-grid" d="M40 60H440M40 140H440M40 220H440M40 300H440M40 40V320"/>
+                <path class="curve-bg-arrow" d="M140 260V178h-40l82-92 82 92h-40v82"/>
+                <path class="curve-bg-arrow tall" d="M285 260V128h-50l92-108 92 108h-50v132"/>
+                <path class="curve-line" d="M42 304 C140 298 206 246 270 188 C338 126 380 68 440 30"/>
+                <g class="curve-years"><text x="35" y="360">1</text><text x="82" y="360">2</text><text x="129" y="360">3</text><text x="176" y="360">4</text><text x="223" y="360">5</text><text x="270" y="360">6</text><text x="317" y="360">7</text><text x="364" y="360">8</text><text x="411" y="360">9</text><text x="448" y="360">10</text></g>
+              </svg>
+              <p class="self-pay-note">Simulação baseada na inflação média da energia elétrica e na geração estimada do sistema.</p>
+              <div class="accumulated-pill">Economia acumulada: <strong id="ten-year-savings">R$ 0,00</strong></div>
+              <footer class="reference-footer">Página 4 de 6</footer>
+            </article>
+
+            <article class="proposal-page reference-page investment-page">
+              <div class="page-rail"></div>
+              <header class="reference-header"><div><strong data-bind="companyName">HV Energias Renováveis</strong><span></span></div><i class="hv-mark small">HV</i></header>
+              <h2 class="investment-title">PROPOSTA DE INVESTIMENTO</h2>
+              <section class="investment-head">
+                <div><span>VALOR TOTAL DO SISTEMA</span><strong data-bind-currency="investment">R$ 0,00</strong></div>
+                <aside><span>DATA DA PROPOSTA</span><strong data-bind="issuedAt">--/--/----</strong></aside>
+              </section>
+              <section class="projection-table-section reference-payback">
+                <h3>PROJEÇÃO DE RETORNO (PAYBACK)</h3>
                 <table class="projection-table">
                   <thead><tr><th>Período</th><th>Economia anual</th><th>Economia acumulada</th><th>Saldo acumulado</th></tr></thead>
                   <tbody id="financial-projection-body"></tbody>
                 </table>
               </section>
+              <div class="money-icon" aria-hidden="true"><svg viewBox="0 0 120 90"><path d="M15 75h90M24 64V48M42 64V36M60 64V25M78 64V14"/><path d="M16 50c34 0 55-14 78-38"/><path d="m92 12 2 20-17-8"/><rect x="76" y="51" width="24" height="17"/><circle cx="100" cy="69" r="13"/></svg></div>
               <section class="projection-notes">
-                <strong>Premissas da projeção</strong>
-                <p>Reajuste tarifário de 5% ao ano · Degradação de geração de 0,5% ao ano · Horizonte de 20 anos · Investimento descontado do saldo acumulado.</p>
-                <small>Os resultados são estimativas baseadas nos dados da conta, nas premissas técnicas e no cenário tarifário adotado. Clima, consumo, regras da distribuidora, impostos e condições reais de instalação podem alterar os valores. Esta projeção não constitui garantia financeira.</small>
+                <strong>NOTAS TÉCNICAS DA PROJEÇÃO:</strong>
+                <p>• Inflação energética considerada: 5% ao ano.</p>
+                <p>• Degradação de geração considerada: 0,5% ao ano.</p>
+                <p>• Os cálculos de economia anual consideram a geração estimada e a tarifa informada, projetadas para o período de 20 anos.</p>
+                <p>• Valores baseados em projeções matemáticas e sujeitos a alterações da concessionária e análise técnica.</p>
+                <p>• O payback é calculado no momento em que o saldo acumulado torna-se positivo.</p>
               </section>
-              <section class="signature-area"><div><span></span><strong data-bind="responsibleName">Responsável</strong><small data-bind="phone">Telefone</small><small data-bind="email"></small></div><div><span></span><strong data-bind="customerName">Cliente</strong><small>De acordo com a proposta</small></div></section>
-              <footer class="document-footer"><span data-bind="companyName">Energia Solar</span><span>Página 5 de 5</span></footer>
+              <footer class="reference-footer">Página 5 de 6</footer>
+            </article>
+
+            <article class="proposal-page reference-page closing-page">
+              <div class="page-rail"></div>
+              <div class="blue-corners" aria-hidden="true"></div>
+              <header class="reference-header"><div><strong data-bind="companyName">HV Energias Renováveis</strong><span></span></div><i class="hv-mark small">HV</i></header>
+              <div class="trophy" aria-hidden="true"><svg viewBox="0 0 120 110"><path d="M38 20h44v28c0 20-9 32-22 32S38 68 38 48Z"/><path d="M38 30H20c0 20 8 31 24 33M82 30h18c0 20-8 31-24 33"/><path d="M60 80v15M42 98h36"/><path d="M50 38h20"/></svg></div>
+              <section class="closing-copy">
+                <h2>PARABÉNS POR TOMAR UMA<br>DECISÃO <b>SUSTENTÁVEL</b> E<br><b>ECONÔMICA!</b></h2>
+                <p>Com esta assinatura, você reduzirá sua conta de luz em até 90% e contribuirá para um planeta mais verde e sustentável!</p>
+              </section>
+              <section class="signature-area reference-signatures"><div><span></span><strong data-bind="customerName">Cliente</strong></div><div><span></span><strong data-bind="companyName">Empresa</strong></div></section>
+              <footer class="reference-footer">Página 6 de 6</footer>
             </article>
             </div>
           </div>

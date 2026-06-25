@@ -22,12 +22,16 @@ test("salva somente configuracoes reconhecidas e numericas validas", () => {
     responsibleName: "Matheus Ramos",
     pricePerWp: "3.75",
     performanceRatio: "0.81",
+    moduleWarrantyYears: "30",
+    inverterWarrantyYears: "10",
     ignored: "nao deve persistir",
   });
 
   assert.equal(saved.companyName, "Solaire Energia");
   assert.equal(saved.pricePerWp, 3.75);
   assert.equal(saved.performanceRatio, 0.81);
+  assert.equal(saved.moduleWarrantyYears, 30);
+  assert.equal(saved.inverterWarrantyYears, 10);
   assert.equal("ignored" in saved, false);
   assert.deepEqual(loadSettings(storage), saved);
 });

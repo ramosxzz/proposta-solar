@@ -178,12 +178,16 @@ async function dimensionSystem(event) {
       modulePowerWp: Number($("#module-power").value),
       effectiveTariff: state.bill.effectiveEnergyTariff,
       inverterModel: $("#inverter-model").value.trim(),
+      pricePerWp: state.settings.pricePerWp,
+      performanceRatio: state.settings.performanceRatio,
     });
     state.proposal = createProposalModel({
       bill: state.bill,
       system: state.system,
       settings: state.settings,
       inverterModel: $("#inverter-model").value.trim(),
+      moduleWarrantyYears: Number($("#module-warranty").value),
+      inverterWarrantyYears: Number($("#inverter-warranty").value),
       irradiation: state.irradiation,
     });
     renderResult();
@@ -228,6 +232,7 @@ function renderProposal() {
 
   renderConsumptionChart();
   renderGenerationChart();
+  renderSystemComparisonChart();
   renderFinancialProjection();
   fitProposalPreview();
 }
@@ -236,6 +241,15 @@ function renderFinancialProjection() {
   const { financialProjection } = state.proposal;
   const tableBody = $("#financial-projection-body");
   tableBody.replaceChildren();
+
+  const immediateRow = document.createElement("tr");
+  const immediateValues = ["Imediato", formatCurrency(0), formatCurrency(0), formatCurrency(-state.proposal.investment)];
+  for (const value of immediateValues) {
+    const cell = document.createElement("td");
+    cell.textContent = value;
+    immediateRow.append(cell);
+  }
+  tableBody.append(immediateRow);
 
   for (const row of financialProjection.rows) {
     const rowElement = document.createElement("tr");
@@ -257,14 +271,15 @@ function renderFinancialProjection() {
     tableBody.append(rowElement);
   }
 
-  $("#projection-total-savings").textContent = formatCurrency(financialProjection.totalSavings);
-  $("#projection-payback-year").textContent = financialProjection.paybackYear
-    ? `${financialProjection.paybackYear}º ano`
-    : "Acima de 20 anos";
+  $("#ten-year-savings").textContent = formatCurrency(state.proposal.tenYearSavings);
+  const paybackLabel = financialProjection.paybackYear ? `${financialProjection.paybackYear}º ano` : "Acima de 20 anos";
+  const paybackElement = $("#projection-payback-year");
+  if (paybackElement) paybackElement.textContent = paybackLabel;
 }
 
 function renderConsumptionChart() {
   const chart = $("#consumption-chart");
+  if (!chart) return;
   chart.replaceChildren();
   const history = [...state.bill.history].slice(0, 12).reverse();
   const max = Math.max(...history.map((item) => item.kwh), 1);
@@ -279,6 +294,7 @@ function renderConsumptionChart() {
 
 function renderGenerationChart() {
   const chart = $("#generation-chart");
+  if (!chart) return;
   chart.replaceChildren();
   const max = Math.max(...state.proposal.monthlyProjection.map((item) => item.kwh), 1);
   for (const item of state.proposal.monthlyProjection) {
@@ -288,6 +304,31 @@ function renderGenerationChart() {
     $("b", bar).textContent = formatNumber(item.kwh, 0);
     $("span", bar).textContent = item.label;
     chart.append(bar);
+  }
+}
+
+function renderSystemComparisonChart() {
+  const chart = $("#system-comparison-chart");
+  if (!chart) return;
+  chart.replaceChildren();
+  const generation = state.proposal.monthlyProjection;
+  const consumption = state.proposal.averageConsumptionKwh;
+  const max = Math.max(...generation.map((item) => item.kwh), consumption, 1);
+  for (const item of generation) {
+    const group = document.createElement("div");
+    group.className = "system-month";
+    const generationBar = document.createElement("span");
+    generationBar.className = "generation-bar";
+    generationBar.style.height = `${Math.max(4, item.kwh / max * 100)}%`;
+    const consumptionBar = document.createElement("span");
+    consumptionBar.className = "consumption-bar";
+    consumptionBar.style.height = `${Math.max(4, consumption / max * 100)}%`;
+    const generationValue = document.createElement("b");
+    generationValue.textContent = formatNumber(item.kwh, 0);
+    const consumptionValue = document.createElement("em");
+    consumptionValue.textContent = formatNumber(consumption, 0);
+    group.append(generationBar, consumptionBar, generationValue, consumptionValue);
+    chart.append(group);
   }
 }
 
@@ -362,6 +403,8 @@ async function handleSettingsSubmit(event) {
       modulePowerWp: state.system.modulePowerWp,
       effectiveTariff: state.bill.effectiveEnergyTariff,
       inverterModel: state.proposal.inverterModel,
+      pricePerWp: state.settings.pricePerWp,
+      performanceRatio: state.settings.performanceRatio,
     });
     state.proposal = createProposalModel({ bill: state.bill, system: state.system, settings: state.settings, inverterModel: state.proposal.inverterModel, irradiation: state.irradiation });
     renderResult();

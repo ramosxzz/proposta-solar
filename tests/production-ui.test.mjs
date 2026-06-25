@@ -15,27 +15,37 @@ test("inclui favicon e autoria oficial", async () => {
   assert.match(favicon, /#cf6b38/i);
 });
 
-test("inclui cinco paginas com funcionamento on-grid e projecao financeira", async () => {
+test("inclui seis paginas no modelo visual da proposta de referencia", async () => {
   const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
-  assert.equal((html.match(/<article class="proposal-page/g) || []).length, 5);
-  assert.match(html, /Como funciona o sistema on-grid/);
+  assert.equal((html.match(/<article class="proposal-page/g) || []).length, 6);
+  assert.match(html, /PROPOSTA\s+COMERCIAL/);
+  assert.match(html, /ENERGIA SOLAR/);
+  assert.match(html, /FUNCIONAMENTO DO\s+SISTEMA FOTOVOLTAICO ON-GRID/);
+  assert.match(html, /SEU SISTEMA/);
+  assert.match(html, /Garantia dos módulos/);
+  assert.match(html, /Garantia do inversor/);
+  assert.match(html, /Investimento que se Paga/);
+  assert.match(html, /PROPOSTA DE INVESTIMENTO/);
+  assert.match(html, /PARABÉNS POR TOMAR UMA/);
   assert.match(html, /id="on-grid-diagram"/);
-  assert.match(html, /Projeção financeira de 20 anos/);
+  assert.match(html, /id="system-comparison-chart"/);
+  assert.match(html, /id="investment-curve"/);
   assert.match(html, /id="financial-projection-body"/);
-  assert.match(html, /id="projection-total-savings"/);
+  assert.match(html, /id="ten-year-savings"/);
   assert.match(html, /5% ao ano/);
   assert.match(html, /0,5% ao ano/);
-  assert.match(html, /Página 5 de 5/);
+  assert.match(html, /Página 6 de 6/);
 });
 
-test("renderiza vinte anos e destaca o retorno projetado", async () => {
+test("renderiza payback com linha imediata e grafico comparativo", async () => {
   const app = await readFile(new URL("../src/app.js", import.meta.url), "utf8");
 
   assert.match(app, /function renderFinancialProjection/);
   assert.match(app, /financialProjection\.rows/);
+  assert.match(app, /Imediato/);
   assert.match(app, /is-payback-year/);
-  assert.match(app, /Acima de 20 anos/);
-  assert.match(app, /projection-total-savings/);
+  assert.match(app, /ten-year-savings/);
+  assert.match(app, /system-comparison-chart/);
   assert.match(app, /formatCurrency/);
 });

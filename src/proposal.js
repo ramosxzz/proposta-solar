@@ -13,7 +13,21 @@ export const formatNumber = (value, digits = 1) => new Intl.NumberFormat("pt-BR"
   maximumFractionDigits: digits,
 }).format(Number(value) || 0);
 
-export function createProposalModel({ bill, system, settings, inverterModel, irradiation, issuedAt = new Date() }) {
+function warrantyLabel(value) {
+  const years = Math.max(1, Math.round(Number(value) || 0));
+  return `${years} ${years === 1 ? "ano" : "anos"}`;
+}
+
+export function createProposalModel({
+  bill,
+  system,
+  settings,
+  inverterModel,
+  moduleWarrantyYears,
+  inverterWarrantyYears,
+  irradiation,
+  issuedAt = new Date(),
+}) {
   const performanceRatio = 0.8;
   const monthlyProjection = irradiation.monthly.map((solarHours, index) => ({
     label: MONTH_LABELS[index],
@@ -34,6 +48,12 @@ export function createProposalModel({ bill, system, settings, inverterModel, irr
     annualTariffEscalation,
     annualGenerationDegradation,
   });
+  const tenYearSavings = financialProjection.rows[9]?.accumulatedSavings ?? financialProjection.totalSavings;
+  const solarCoveragePercent = system.monthlyConsumption > 0
+    ? (system.monthlyGenerationKwh / system.monthlyConsumption) * 100
+    : 0;
+  const resolvedModuleWarrantyYears = Number(moduleWarrantyYears ?? settings.moduleWarrantyYears ?? 25);
+  const resolvedInverterWarrantyYears = Number(inverterWarrantyYears ?? settings.inverterWarrantyYears ?? 5);
 
   return {
     proposalCode: `${dateCode}-${customerCode || "SOLAR"}`,
@@ -46,15 +66,27 @@ export function createProposalModel({ bill, system, settings, inverterModel, irr
     currentConsumptionKwh: bill.currentConsumptionKwh,
     averageConsumptionKwh: system.monthlyConsumption,
     moduleDescription: `${system.moduleCount} módulos de ${formatNumber(system.modulePowerWp, 0)} Wp`,
+    modulePowerWp: system.modulePowerWp,
+    moduleCount: system.moduleCount,
     inverterModel,
+    inverterCount: 1,
+    moduleWarrantyYears: resolvedModuleWarrantyYears,
+    inverterWarrantyYears: resolvedInverterWarrantyYears,
+    moduleWarrantyLabel: warrantyLabel(resolvedModuleWarrantyYears),
+    inverterWarrantyLabel: warrantyLabel(resolvedInverterWarrantyYears),
     installedPowerKwp: system.installedPowerKwp,
+    panelAreaM2: system.moduleCount * 2.82,
+    panelEfficiencyPercent: 21.4,
     monthlyGenerationKwh: system.monthlyGenerationKwh,
     annualGenerationKwh: system.annualGenerationKwh,
+    annualConsumptionKwh: system.monthlyConsumption * 12,
+    solarCoveragePercent,
     investment: system.investment,
     monthlySavings: system.monthlySavings,
     annualSavings: system.annualSavings,
     paybackYears: system.paybackYears,
     financialProjection,
+    tenYearSavings,
     annualTariffEscalation,
     annualGenerationDegradation,
     referenceLifetimeYears: 25,

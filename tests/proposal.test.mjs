@@ -29,6 +29,8 @@ test("cria modelo de proposta sem copiar identificadores sensiveis", () => {
     },
     settings: { companyName: "Solaire Energia", responsibleName: "Matheus", phone: "51999999999", email: "" },
     inverterModel: "Deye 6 kW",
+    moduleWarrantyYears: 25,
+    inverterWarrantyYears: 5,
     irradiation: { annual: 4.617, monthly: Array(12).fill(4.617) },
     issuedAt: new Date("2026-06-23T12:00:00-03:00"),
   });
@@ -36,6 +38,12 @@ test("cria modelo de proposta sem copiar identificadores sensiveis", () => {
   assert.equal(model.customerName, "CLIENTE TESTE");
   assert.equal(model.moduleDescription, "11 módulos de 550 Wp");
   assert.equal(model.inverterModel, "Deye 6 kW");
+  assert.equal(model.moduleWarrantyYears, 25);
+  assert.equal(model.inverterWarrantyYears, 5);
+  assert.equal(model.moduleWarrantyLabel, "25 anos");
+  assert.equal(model.inverterWarrantyLabel, "5 anos");
+  assert.ok(model.solarCoveragePercent > 90);
+  assert.ok(model.tenYearSavings > model.annualSavings * 10);
   assert.equal(model.monthlyProjection.length, 12);
   assert.equal(model.financialProjection.rows.length, 20);
   assert.equal(model.financialProjection.paybackYear, 3);
