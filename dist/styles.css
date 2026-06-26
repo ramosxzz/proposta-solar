@@ -371,17 +371,11 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   height: 82px;
 }
 
-.reference-header strong {
+.reference-logo {
   display: block;
-  font-size: 27px;
-  letter-spacing: .08em;
-}
-
-.reference-header span {
-  display: block;
-  width: 54px;
-  border-bottom: 4px solid var(--ref-blue);
-  margin-top: 7px;
+  width: 155px;
+  height: auto;
+  object-fit: contain;
 }
 
 .hv-mark {
