@@ -40,6 +40,9 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /id="roof-photo-image"/);
   assert.match(html, /id="roof-photo-placeholder"/);
   assert.match(html, /id="investment-curve"/);
+  assert.match(html, /class="curve-axis"/);
+  assert.match(html, /class="curve-soft-fill"/);
+  assert.doesNotMatch(html, /class="curve-bg-arrow"/);
   assert.match(html, /id="financial-projection-body"/);
   assert.doesNotMatch(html, /class="money-icon"/);
   assert.match(html, /id="ten-year-savings"/);
@@ -54,7 +57,11 @@ test("evita sobreposicao e bordas pesadas nas paginas visuais", async () => {
   const css = await readFile(new URL("../styles.css", import.meta.url), "utf8");
 
   assert.match(css, /\.investment-curve\s*\{[^}]*top:\s*500px/s);
-  assert.match(css, /\.investment-curve\s*\{[^}]*width:\s*430px/s);
+  assert.match(css, /\.investment-curve\s*\{[^}]*width:\s*455px/s);
+  assert.match(css, /\.reference-page\s*\{[^}]*border-top:\s*0/s);
+  assert.match(css, /\.reference-page\s*\{[^}]*border-bottom:\s*0/s);
+  assert.match(css, /\.self-pay-copy h2\s*\{[^}]*font-weight:\s*800/s);
+  assert.match(css, /\.self-pay-copy h2\s*\{[^}]*text-shadow:\s*none/s);
   assert.match(css, /\.reference-benefits article\s*\{[^}]*border:\s*0/s);
   assert.match(css, /\.roof-photo-frame\s*\{[^}]*border:\s*0/s);
   assert.match(css, /\.roof-photo-placeholder\s*\{[^}]*border:\s*0/s);

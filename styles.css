@@ -349,8 +349,8 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .reference-page {
   padding: 48px 47px 48px;
-  border-top: 18px solid #030303;
-  border-bottom: 18px solid #030303;
+  border-top: 0;
+  border-bottom: 0;
 }
 
 .reference-header {
@@ -701,18 +701,20 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .self-pay-copy h2 {
   margin: 0;
-  color: var(--ref-soft-blue);
-  font-size: 75px;
-  line-height: 1.05;
-  letter-spacing: -.04em;
-  text-shadow: 2px 2px 0 #084279;
+  color: #125d93;
+  font-size: 72px;
+  line-height: 1.02;
+  letter-spacing: -.055em;
+  font-weight: 800;
+  text-shadow: none;
 }
 
 .self-pay-copy p {
   margin: 24px 0 0;
-  color: var(--ref-orange);
-  font-size: 36px;
-  line-height: 1.12;
+  color: #ed9b20;
+  font-size: 31px;
+  line-height: 1.18;
+  font-weight: 500;
   max-width: 625px;
 }
 
@@ -730,36 +732,41 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .investment-curve {
   position: absolute;
-  right: 92px;
+  right: 78px;
   top: 500px;
-  width: 430px;
-  height: 320px;
+  width: 455px;
+  height: 300px;
 }
 
 .curve-grid {
-  stroke: #d5dedb;
-  stroke-width: 2;
+  stroke: #dbe5e1;
+  stroke-width: 1.5;
   fill: none;
 }
 
-.curve-bg-arrow {
-  fill: rgba(217, 226, 222, .5);
-  stroke: none;
+.curve-axis {
+  stroke: #cfd9d5;
+  stroke-width: 1.8;
+  fill: none;
 }
 
-.curve-bg-arrow.tall { opacity: .75; }
+.curve-soft-fill {
+  fill: rgba(255, 173, 31, .08);
+  stroke: none;
+}
 
 .curve-line {
   fill: none;
-  stroke: var(--ref-orange);
-  stroke-width: 13;
+  stroke: #f5a11d;
+  stroke-width: 8;
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .curve-years text {
-  fill: #6d7370;
+  fill: #737b78;
   stroke: none;
-  font: 34px "Geist", sans-serif;
+  font: 500 23px "Geist", sans-serif;
 }
 
 .self-pay-note {
