@@ -25,6 +25,7 @@ export function createProposalModel({
   inverterModel,
   moduleWarrantyYears,
   inverterWarrantyYears,
+  roofPhotoDataUrl = "",
   irradiation,
   issuedAt = new Date(),
 }) {
@@ -97,5 +98,6 @@ export function createProposalModel({
     phone: settings.phone,
     email: settings.email,
     logoDataUrl: settings.logoDataUrl,
+    roofPhotoDataUrl,
   };
 }

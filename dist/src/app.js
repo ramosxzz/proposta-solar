@@ -168,6 +168,8 @@ async function dimensionSystem(event) {
   if (!event.currentTarget.reportValidity()) return;
 
   try {
+    const roofPhotoFile = $("#roof-photo").files[0];
+    const roofPhotoDataUrl = roofPhotoFile ? await fileToDataUrl(roofPhotoFile, "Não foi possível ler a foto do telhado.") : "";
     state.bill = collectReviewedBill();
     state.irradiation = await loadIrradiation(state.bill.city, state.bill.state);
     const monthlyConsumption = calculateAverageConsumption(state.bill.history.map((item) => item.kwh));
@@ -188,6 +190,7 @@ async function dimensionSystem(event) {
       inverterModel: $("#inverter-model").value.trim(),
       moduleWarrantyYears: Number($("#module-warranty").value),
       inverterWarrantyYears: Number($("#inverter-warranty").value),
+      roofPhotoDataUrl,
       irradiation: state.irradiation,
     });
     renderResult();
@@ -232,11 +235,22 @@ function renderProposal() {
   }
   if (brandMark) brandMark.hidden = Boolean(model.logoDataUrl);
 
+  renderRoofPhoto();
   renderConsumptionChart();
   renderGenerationChart();
   renderSystemComparisonChart();
   renderFinancialProjection();
   fitProposalPreview();
+}
+
+function renderRoofPhoto() {
+  const image = $("#roof-photo-image");
+  const placeholder = $("#roof-photo-placeholder");
+  if (!image || !placeholder) return;
+  const roofPhotoDataUrl = state.proposal.roofPhotoDataUrl;
+  image.hidden = !roofPhotoDataUrl;
+  placeholder.hidden = Boolean(roofPhotoDataUrl);
+  if (roofPhotoDataUrl) image.src = roofPhotoDataUrl;
 }
 
 function renderFinancialProjection() {
@@ -374,11 +388,11 @@ function fillSettingsForm() {
   $("#setting-logo").value = "";
 }
 
-function fileToDataUrl(file) {
+function fileToDataUrl(file, errorMessage = "Não foi possível ler o arquivo.") {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
-    reader.onerror = () => reject(new Error("Não foi possível ler o logotipo."));
+    reader.onerror = () => reject(new Error(errorMessage));
     reader.readAsDataURL(file);
   });
 }
@@ -388,7 +402,7 @@ async function handleSettingsSubmit(event) {
   event.preventDefault();
   if (!event.currentTarget.reportValidity()) return;
   const logoFile = $("#setting-logo").files[0];
-  const logoDataUrl = logoFile ? await fileToDataUrl(logoFile) : state.settings.logoDataUrl;
+  const logoDataUrl = logoFile ? await fileToDataUrl(logoFile, "Não foi possível ler o logotipo.") : state.settings.logoDataUrl;
   state.settings = saveSettings(localStorage, {
     companyName: $("#setting-company").value,
     responsibleName: $("#setting-responsible").value,
@@ -408,7 +422,16 @@ async function handleSettingsSubmit(event) {
       pricePerWp: state.settings.pricePerWp,
       performanceRatio: state.settings.performanceRatio,
     });
-    state.proposal = createProposalModel({ bill: state.bill, system: state.system, settings: state.settings, inverterModel: state.proposal.inverterModel, irradiation: state.irradiation });
+    state.proposal = createProposalModel({
+      bill: state.bill,
+      system: state.system,
+      settings: state.settings,
+      inverterModel: state.proposal.inverterModel,
+      moduleWarrantyYears: state.proposal.moduleWarrantyYears,
+      inverterWarrantyYears: state.proposal.inverterWarrantyYears,
+      roofPhotoDataUrl: state.proposal.roofPhotoDataUrl,
+      irradiation: state.irradiation,
+    });
     renderResult();
     renderProposal();
   }

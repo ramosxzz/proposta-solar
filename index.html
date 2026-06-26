@@ -133,6 +133,7 @@
               <label class="field"><span>Marca e modelo do inversor</span><input id="inverter-model" placeholder="Ex.: Deye SUN-6K-G" required></label>
               <label class="field"><span>Garantia dos módulos</span><div class="input-suffix"><input id="module-warranty" type="number" min="1" value="25" required><b>anos</b></div></label>
               <label class="field"><span>Garantia do inversor</span><div class="input-suffix"><input id="inverter-warranty" type="number" min="1" value="5" required><b>anos</b></div></label>
+              <label class="field span-2"><span>Foto do telhado do cliente</span><input id="roof-photo" type="file" accept="image/png,image/jpeg"><small>Opcional. Essa imagem aparece na página “Seu sistema”.</small></label>
             </div>
           </fieldset>
 
@@ -211,7 +212,7 @@
               <h2 class="system-title">SEU SISTEMA</h2>
               <section class="equipment-table-reference">
                 <div>ITEM</div><div>MODELO</div><div>QUANTIDADE</div>
-                <strong>MÓDULOS<br>INVERSOR(ES)</strong>
+                <strong><span>Módulos</span><span>Inversor(es)</span></strong>
                 <strong><b><span data-bind-number="modulePowerWp" data-digits="0">0</span> Wp</b><b data-bind="inverterModel">Inversor</b></strong>
                 <strong><b data-bind-number="moduleCount" data-digits="0">0</b><b data-bind-number="inverterCount" data-digits="0">1</b></strong>
               </section>
@@ -231,7 +232,12 @@
                   <div><dt>Geração média mensal estimada:</dt><dd><span data-bind-number="monthlyGenerationKwh" data-digits="0">0</span> kWh</dd></div>
                   <div><dt>Percentual de energia solar:</dt><dd><span data-bind-number="solarCoveragePercent" data-digits="1">0</span> %</dd></div>
                 </dl>
-                <div class="satellite-card"><svg viewBox="0 0 220 190" aria-hidden="true"><rect x="10" y="10" width="200" height="170" rx="14"/><path d="M20 128 82 78l38 30 72-68"/><path d="M42 42h42v42H42zM132 112h48v40h-48z"/></svg></div>
+                <figure class="roof-photo-frame">
+                  <img id="roof-photo-image" alt="Foto do telhado do cliente" hidden>
+                  <div id="roof-photo-placeholder" class="roof-photo-placeholder" aria-label="Espaço para foto do telhado do cliente" role="img">
+                    <svg viewBox="0 0 220 170" aria-hidden="true"><rect x="20" y="18" width="180" height="134" rx="12"/><path d="M30 114 88 66l38 30 64-64"/><path d="M52 44h42v42H52zM138 100h48v40h-48z"/></svg>
+                  </div>
+                </figure>
               </section>
               <section class="comparison-section">
                 <h3>Gráfico de <b>geração</b> e <strong>Consumo</strong> mensal [kWh]</h3>

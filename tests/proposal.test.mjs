@@ -31,6 +31,7 @@ test("cria modelo de proposta sem copiar identificadores sensiveis", () => {
     inverterModel: "Deye 6 kW",
     moduleWarrantyYears: 25,
     inverterWarrantyYears: 5,
+    roofPhotoDataUrl: "data:image/png;base64,telhado",
     irradiation: { annual: 4.617, monthly: Array(12).fill(4.617) },
     issuedAt: new Date("2026-06-23T12:00:00-03:00"),
   });
@@ -42,6 +43,7 @@ test("cria modelo de proposta sem copiar identificadores sensiveis", () => {
   assert.equal(model.inverterWarrantyYears, 5);
   assert.equal(model.moduleWarrantyLabel, "25 anos");
   assert.equal(model.inverterWarrantyLabel, "5 anos");
+  assert.equal(model.roofPhotoDataUrl, "data:image/png;base64,telhado");
   assert.ok(model.solarCoveragePercent > 90);
   assert.ok(model.tenYearSavings > model.annualSavings * 10);
   assert.equal(model.monthlyProjection.length, 12);

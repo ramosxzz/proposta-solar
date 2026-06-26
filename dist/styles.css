@@ -537,9 +537,12 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 }
 
 .system-title {
-  margin: 36px 0 36px;
-  font-size: 55px;
-  letter-spacing: .08em;
+  margin: 34px 0 30px;
+  color: #070907;
+  font-size: 51px;
+  line-height: .95;
+  letter-spacing: .055em;
+  font-weight: 800;
 }
 
 .equipment-table-reference {
@@ -553,24 +556,41 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   display: grid;
   place-items: center;
   border-radius: 11px;
-  background: #030303;
-  color: var(--ref-yellow);
+  background: #080908;
+  color: #f1e700;
   text-align: center;
-  font-size: 21px;
-  font-weight: 900;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.02em;
 }
 
 .equipment-table-reference > div {
   min-height: 32px;
-  font-size: 18px;
+  font: 800 15px "Geist", sans-serif;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
 }
 
 .equipment-table-reference strong {
   min-height: 82px;
-  line-height: 1.25;
+  line-height: 1.18;
+  padding: 13px 8px;
 }
 
-.equipment-table-reference b { display: block; }
+.equipment-table-reference b,
+.equipment-table-reference strong > span {
+  display: block;
+}
+
+.equipment-table-reference b:first-child {
+  font: 800 21px "Geist Mono", monospace;
+  letter-spacing: -.04em;
+}
+
+.equipment-table-reference b + b,
+.equipment-table-reference strong > span + span {
+  margin-top: 8px;
+}
 
 .system-body-reference {
   margin-top: 70px;
@@ -591,18 +611,43 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 .system-body-reference dt { margin: 0; }
 .system-body-reference dd { margin: 0; color: #050505; font-weight: 800; }
 
-.satellite-card {
+.roof-photo-frame {
   height: 260px;
-  border: 5px solid #ddd;
+  margin: 0;
+  border: 5px solid #dcdcdc;
   border-radius: 17px;
-  padding: 14px;
-  transform: rotate(.5deg);
+  padding: 19px;
+  background: #fff;
 }
 
-.satellite-card svg {
+.roof-photo-frame img,
+.roof-photo-placeholder {
   width: 100%;
   height: 100%;
-  stroke: #c6b097;
+  border-radius: 12px;
+}
+
+.roof-photo-frame img {
+  display: block;
+  object-fit: cover;
+}
+
+.roof-photo-placeholder {
+  display: grid;
+  place-items: center;
+  border: 2px solid #c7b198;
+  background: #f4e6cf;
+}
+
+.roof-photo-placeholder svg {
+  width: 86%;
+  height: 86%;
+  stroke: #c2ab91;
+  stroke-width: 2;
+  fill: none;
+}
+
+.roof-photo-placeholder svg rect:first-child {
   fill: #f4e6cf;
 }
 
