@@ -861,19 +861,6 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   font-size: 9px;
 }
 
-.money-icon {
-  display: grid;
-  place-items: center;
-  height: 66px;
-  color: #45ad4c;
-}
-
-.money-icon svg {
-  width: 78px;
-  stroke-width: 5;
-  fill: none;
-}
-
 .projection-notes {
   position: absolute;
   left: 47px;

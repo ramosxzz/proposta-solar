@@ -41,6 +41,7 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /id="roof-photo-placeholder"/);
   assert.match(html, /id="investment-curve"/);
   assert.match(html, /id="financial-projection-body"/);
+  assert.doesNotMatch(html, /class="money-icon"/);
   assert.match(html, /id="ten-year-savings"/);
   assert.match(html, /5% ao ano/);
   assert.match(html, /0,5% ao ano/);
