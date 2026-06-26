@@ -373,7 +373,8 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .reference-logo {
   display: block;
-  width: 155px;
+  width: 82px;
+  max-height: 76px;
   height: auto;
   object-fit: contain;
 }
@@ -443,13 +444,15 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .reference-benefits article {
   height: 172px;
-  border: 1.5px solid var(--ref-blue);
+  border: 0;
   border-radius: 16px;
   display: grid;
   justify-items: center;
   align-content: center;
   text-align: center;
   padding: 18px;
+  background: rgba(255,255,255,.74);
+  box-shadow: 0 10px 30px rgba(5, 22, 52, .06);
 }
 
 .reference-benefits strong {
@@ -614,10 +617,11 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 .roof-photo-frame {
   height: 260px;
   margin: 0;
-  border: 5px solid #dcdcdc;
+  border: 0;
   border-radius: 17px;
   padding: 19px;
-  background: #fff;
+  background: #f8f8f5;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
 }
 
 .roof-photo-frame img,
@@ -635,7 +639,7 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 .roof-photo-placeholder {
   display: grid;
   place-items: center;
-  border: 2px solid #c7b198;
+  border: 0;
   background: #f4e6cf;
 }
 
@@ -701,6 +705,7 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .self-pay-copy {
   margin: 35px 0 0 56px;
+  max-width: 650px;
 }
 
 .self-pay-copy h2 {
@@ -713,16 +718,17 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 }
 
 .self-pay-copy p {
-  margin: 28px 0 0;
+  margin: 24px 0 0;
   color: var(--ref-orange);
-  font-size: 42px;
-  line-height: 1.08;
+  font-size: 36px;
+  line-height: 1.12;
+  max-width: 625px;
 }
 
 .year-one-saving {
   position: absolute;
   left: 40px;
-  top: 705px;
+  top: 710px;
   width: 190px;
   text-align: center;
   font-size: 25px;
@@ -733,10 +739,10 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .investment-curve {
   position: absolute;
-  right: 70px;
-  top: 390px;
-  width: 500px;
-  height: 390px;
+  right: 92px;
+  top: 500px;
+  width: 430px;
+  height: 320px;
 }
 
 .curve-grid {

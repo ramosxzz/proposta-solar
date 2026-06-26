@@ -4,7 +4,7 @@ await rm("dist", { recursive: true, force: true });
 await mkdir("dist/src", { recursive: true });
 await mkdir("dist/data", { recursive: true });
 
-for (const file of ["index.html", "styles.css", "favicon.svg", "FOTO1.png", "foto2.png", "hv-logo.png", "_headers"]) {
+for (const file of ["index.html", "styles.css", "favicon.svg", "FOTO1.png", "foto2.png", "hv-logo.png", "hv-icon.png", "_headers"]) {
   await copyFile(file, `dist/${file}`);
 }
 

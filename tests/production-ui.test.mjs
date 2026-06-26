@@ -31,7 +31,7 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /PROPOSTA PRONTA/);
   assert.match(html, /src="\.\/foto2\.png"/);
   assert.match(html, /class="cover-client-reference"/);
-  assert.match(html, /src="\.\/hv-logo\.png"/);
+  assert.match(html, /src="\.\/hv-icon\.png"/);
   assert.match(html, /class="reference-logo"/);
   assert.match(html, /src="\.\/FOTO1\.png"/);
   assert.match(html, /id="on-grid-diagram"/);
@@ -46,6 +46,16 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /5% ao ano/);
   assert.match(html, /0,5% ao ano/);
   assert.match(html, /Página 6 de 6/);
+});
+
+test("evita sobreposicao e bordas pesadas nas paginas visuais", async () => {
+  const css = await readFile(new URL("../styles.css", import.meta.url), "utf8");
+
+  assert.match(css, /\.investment-curve\s*\{[^}]*top:\s*500px/s);
+  assert.match(css, /\.investment-curve\s*\{[^}]*width:\s*430px/s);
+  assert.match(css, /\.reference-benefits article\s*\{[^}]*border:\s*0/s);
+  assert.match(css, /\.roof-photo-frame\s*\{[^}]*border:\s*0/s);
+  assert.match(css, /\.roof-photo-placeholder\s*\{[^}]*border:\s*0/s);
 });
 
 test("renderiza payback com linha imediata e grafico comparativo", async () => {

@@ -24,6 +24,7 @@ test("gera um pacote de producao enxuto e completo", async () => {
     "data/solar-brazil.json",
     "favicon.svg",
     "foto2.png",
+    "hv-icon.png",
     "hv-logo.png",
     "index.html",
     "src/app.js",
