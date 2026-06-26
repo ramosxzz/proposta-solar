@@ -226,9 +226,11 @@ function renderProposal() {
 
   const logo = $("#proposal-logo");
   const brandMark = $("#proposal-brand-mark");
-  logo.hidden = !model.logoDataUrl;
-  brandMark.hidden = Boolean(model.logoDataUrl);
-  if (model.logoDataUrl) logo.src = model.logoDataUrl;
+  if (logo) {
+    logo.hidden = !model.logoDataUrl;
+    if (model.logoDataUrl) logo.src = model.logoDataUrl;
+  }
+  if (brandMark) brandMark.hidden = Boolean(model.logoDataUrl);
 
   renderConsumptionChart();
   renderGenerationChart();

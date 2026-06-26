@@ -19,15 +19,17 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
   assert.equal((html.match(/<article class="proposal-page/g) || []).length, 6);
-  assert.match(html, /PROPOSTA\s+COMERCIAL/);
-  assert.match(html, /ENERGIA SOLAR/);
+  assert.match(html, /alt="Proposta comercial energia solar"/);
   assert.match(html, /FUNCIONAMENTO DO\s+SISTEMA FOTOVOLTAICO ON-GRID/);
   assert.match(html, /SEU SISTEMA/);
   assert.match(html, /Garantia dos módulos/);
   assert.match(html, /Garantia do inversor/);
   assert.match(html, /Investimento que se Paga/);
   assert.match(html, /PROPOSTA DE INVESTIMENTO/);
-  assert.match(html, /PARABÉNS POR TOMAR UMA/);
+  assert.match(html, /PROPOSTA PRONTA/);
+  assert.match(html, /src="\.\/foto2\.png"/);
+  assert.match(html, /class="cover-client-reference"/);
+  assert.match(html, /src="\.\/FOTO1\.png"/);
   assert.match(html, /id="on-grid-diagram"/);
   assert.match(html, /id="system-comparison-chart"/);
   assert.match(html, /id="investment-curve"/);

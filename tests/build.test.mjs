@@ -19,9 +19,11 @@ test("gera um pacote de producao enxuto e completo", async () => {
   const files = await listFiles("dist");
 
   assert.deepEqual(files, [
+    "FOTO1.png",
     "_headers",
     "data/solar-brazil.json",
     "favicon.svg",
+    "foto2.png",
     "index.html",
     "src/app.js",
     "src/bill-parser.js",
