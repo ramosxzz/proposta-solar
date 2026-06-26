@@ -353,15 +353,6 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   border-bottom: 18px solid #030303;
 }
 
-.page-rail {
-  position: absolute;
-  right: 0;
-  top: 18px;
-  bottom: 18px;
-  width: 36px;
-  background: var(--ref-blue);
-}
-
 .reference-header {
   position: relative;
   z-index: 1;
@@ -373,7 +364,7 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .reference-logo {
   display: block;
-  width: 82px;
+  width: 76px;
   max-height: 76px;
   height: auto;
   object-fit: contain;
@@ -887,16 +878,6 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   margin: 2px 0;
   color: #747474;
   font: 400 7px/1.2 "Geist", sans-serif;
-}
-
-.blue-corners::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 18px;
-  width: 120px;
-  height: 85px;
-  background: linear-gradient(135deg, #4f8aaa 0 55%, transparent 56%), linear-gradient(45deg, #1d5f8c 0 50%, transparent 51%);
 }
 
 .trophy {

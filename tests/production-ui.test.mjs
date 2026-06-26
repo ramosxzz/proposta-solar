@@ -46,6 +46,8 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /5% ao ano/);
   assert.match(html, /0,5% ao ano/);
   assert.match(html, /Página 6 de 6/);
+  assert.doesNotMatch(html, /class="page-rail"/);
+  assert.doesNotMatch(html, /class="blue-corners"/);
 });
 
 test("evita sobreposicao e bordas pesadas nas paginas visuais", async () => {
