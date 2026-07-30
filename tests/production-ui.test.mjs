@@ -24,6 +24,8 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /SEU SISTEMA/);
   assert.match(html, /Garantia dos módulos/);
   assert.match(html, /Garantia do inversor/);
+  assert.match(html, /id="module-count"/);
+  assert.match(html, /Quantidade de módulos/);
   assert.match(html, /id="roof-photo"/);
   assert.match(html, /Foto do telhado do cliente/);
   assert.match(html, /Investimento que se Paga/);

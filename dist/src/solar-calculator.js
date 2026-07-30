@@ -78,7 +78,10 @@ export function calculateSystem(input) {
   const requiredPowerKwp = targetConsumptionKwh / (irradiation * 30 * performanceRatio);
   const maxKwp = inverterKw != null ? inverterKw * 1.2 : Infinity;
   const cappedPowerKwp = Math.min(requiredPowerKwp, maxKwp);
-  const moduleCount = Math.max(1, Math.ceil((cappedPowerKwp * 1000) / modulePowerWp));
+  const manualModuleCount = Number(input.moduleCount);
+  const moduleCount = Number.isFinite(manualModuleCount) && manualModuleCount > 0
+    ? Math.max(1, Math.round(manualModuleCount))
+    : Math.max(1, Math.ceil((cappedPowerKwp * 1000) / modulePowerWp));
   const installedPowerKwp = (moduleCount * modulePowerWp) / 1000;
   const pricePerWp = Number.isFinite(Number(input.pricePerWp)) && Number(input.pricePerWp) > 0
     ? Number(input.pricePerWp)

@@ -16,6 +16,7 @@ const state = {
   irradiation: null,
   proposal: null,
   extractionMethod: "",
+  manualModuleCount: null,
 };
 
 const panels = $$("[data-step]");
@@ -173,11 +174,14 @@ async function dimensionSystem(event) {
     state.bill = collectReviewedBill();
     state.irradiation = await loadIrradiation(state.bill.city, state.bill.state);
     const monthlyConsumption = calculateAverageConsumption(state.bill.history.map((item) => item.kwh));
+    const moduleCountInput = $("#module-count").value;
+    state.manualModuleCount = moduleCountInput ? Number(moduleCountInput) : null;
     state.system = calculateSystem({
       monthlyConsumption,
       supplyType: state.bill.supplyType,
       irradiation: state.irradiation.annual,
       modulePowerWp: Number($("#module-power").value),
+      moduleCount: state.manualModuleCount ?? undefined,
       effectiveTariff: state.bill.effectiveEnergyTariff,
       inverterModel: $("#inverter-model").value.trim(),
       pricePerWp: state.settings.pricePerWp,
@@ -427,6 +431,7 @@ async function handleSettingsSubmit(event) {
       supplyType: state.bill.supplyType,
       irradiation: state.irradiation.annual,
       modulePowerWp: state.system.modulePowerWp,
+      moduleCount: state.manualModuleCount ?? undefined,
       effectiveTariff: state.bill.effectiveEnergyTariff,
       inverterModel: state.proposal.inverterModel,
       pricePerWp: state.settings.pricePerWp,

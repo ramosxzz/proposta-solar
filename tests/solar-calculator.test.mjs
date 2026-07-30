@@ -39,6 +39,24 @@ test("dimensiona modulos, geracao, investimento, economia e payback", () => {
   assert.ok(result.paybackYears > 2.5 && result.paybackYears < 2.7);
 });
 
+test("permite definir manualmente a quantidade de modulos", () => {
+  const result = calculateSystem({
+    monthlyConsumption: calculateAverageConsumption(rgeHistory),
+    supplyType: "Monofásico",
+    irradiation: 4.5,
+    performanceRatio: 0.8,
+    modulePowerWp: 550,
+    moduleCount: 8,
+    pricePerWp: 3.5,
+    effectiveTariff: 554.75 / 522,
+  });
+
+  assert.equal(result.moduleCount, 8);
+  assert.equal(result.installedPowerKwp, 4.4);
+  assert.ok(Math.abs(result.monthlyGenerationKwh - 475.2) < 0.001);
+  assert.equal(result.investment, 15400);
+});
+
 test("rejeita entradas tecnicas invalidas", () => {
   assert.throws(
     () => calculateSystem({
