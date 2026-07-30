@@ -21,6 +21,7 @@ test("gera um pacote de producao enxuto e completo", async () => {
   assert.deepEqual(files, [
     "FOTO1.png",
     "_headers",
+    "cover-solar-template.png",
     "data/solar-brazil.json",
     "favicon.svg",
     "foto2.png",

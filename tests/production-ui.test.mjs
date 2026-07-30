@@ -31,7 +31,8 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /Investimento que se Paga/);
   assert.match(html, /PROPOSTA DE INVESTIMENTO/);
   assert.match(html, /PROPOSTA PRONTA/);
-  assert.match(html, /src="\.\/foto2\.png"/);
+  assert.match(html, /src="\.\/cover-solar-template\.png"/);
+  assert.match(html, /class="cover-company-logo reference-logo"/);
   assert.match(html, /class="cover-client-reference"/);
   assert.match(html, /src="\.\/hv-icon\.png"/);
   assert.match(html, /data-default-src="\.\/hv-icon\.png"/);
