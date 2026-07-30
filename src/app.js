@@ -230,6 +230,10 @@ function renderProposal() {
   $$('[data-bind-currency]').forEach((element) => {
     element.textContent = formatCurrency(model[element.dataset.bindCurrency]);
   });
+  $$('[data-bind-style-width]').forEach((element) => {
+    const value = Math.max(0, Math.min(100, Number(model[element.dataset.bindStyleWidth]) || 0));
+    element.style.width = `${value}%`;
+  });
 
   const logo = $("#proposal-logo");
   const brandMark = $("#proposal-brand-mark");
@@ -344,22 +348,74 @@ function renderSystemComparisonChart() {
   const generation = state.proposal.monthlyProjection;
   const consumption = state.proposal.averageConsumptionKwh;
   const max = Math.max(...generation.map((item) => item.kwh), consumption, 1);
-  for (const item of generation) {
-    const group = document.createElement("div");
-    group.className = "system-month";
-    const generationBar = document.createElement("span");
-    generationBar.className = "generation-bar";
-    generationBar.style.height = `${Math.max(4, item.kwh / max * 100)}%`;
-    const consumptionBar = document.createElement("span");
-    consumptionBar.className = "consumption-bar";
-    consumptionBar.style.height = `${Math.max(4, consumption / max * 100)}%`;
-    const generationValue = document.createElement("b");
-    generationValue.textContent = formatNumber(item.kwh, 0);
-    const consumptionValue = document.createElement("em");
-    consumptionValue.textContent = formatNumber(consumption, 0);
-    group.append(generationBar, consumptionBar, generationValue, consumptionValue);
-    chart.append(group);
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.classList.add("chart-svg");
+  svg.setAttribute("viewBox", "0 0 640 250");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", "Comparativo de geração solar estimada e consumo médio mensal");
+
+  const grid = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  grid.classList.add("chart-grid");
+  for (const y of [30, 75, 120, 165, 210]) {
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", "44");
+    line.setAttribute("x2", "610");
+    line.setAttribute("y1", String(y));
+    line.setAttribute("y2", String(y));
+    grid.append(line);
   }
+  svg.append(grid);
+
+  const points = [];
+  generation.forEach((item, index) => {
+    const x = 58 + index * 48;
+    const height = Math.max(8, (item.kwh / max) * 170);
+    const y = 210 - height;
+    const bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bar.classList.add("generation-bar-svg");
+    bar.setAttribute("x", String(x));
+    bar.setAttribute("y", String(y));
+    bar.setAttribute("width", "26");
+    bar.setAttribute("height", String(height));
+    bar.setAttribute("rx", "7");
+    svg.append(bar);
+
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.classList.add("chart-month-label");
+    label.setAttribute("x", String(x + 13));
+    label.setAttribute("y", "236");
+    label.textContent = item.label;
+    svg.append(label);
+
+    const value = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    value.classList.add("chart-value-label");
+    value.setAttribute("x", String(x + 13));
+    value.setAttribute("y", String(Math.max(20, y - 8)));
+    value.textContent = formatNumber(item.kwh, 0);
+    svg.append(value);
+
+    points.push(`${x + 13},${210 - Math.max(8, (consumption / max) * 170)}`);
+  });
+
+  const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+  polyline.classList.add("consumption-line");
+  polyline.setAttribute("points", points.join(" "));
+  svg.append(polyline);
+
+  for (const point of points) {
+    const [x, y] = point.split(",");
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.classList.add("consumption-point");
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", y);
+    circle.setAttribute("r", "4");
+    svg.append(circle);
+  }
+
+  const legend = document.createElement("div");
+  legend.className = "chart-legend";
+  legend.innerHTML = "<span><i></i>Geração estimada</span><span><b></b>Consumo médio</span>";
+  chart.append(svg, legend);
 }
 
 async function downloadProposal() {

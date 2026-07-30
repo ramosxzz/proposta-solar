@@ -43,6 +43,11 @@ test("cria modelo de proposta sem copiar identificadores sensiveis", () => {
   assert.equal(model.inverterWarrantyYears, 5);
   assert.equal(model.moduleWarrantyLabel, "25 anos");
   assert.equal(model.inverterWarrantyLabel, "5 anos");
+  assert.equal(model.systemPowerLimitKwp, 6);
+  assert.equal(model.proposalValidityDays, 10);
+  assert.equal(model.validityDistributorLabel, "conforme distribuidora");
+  assert.ok(model.estimatedRemainingBill >= 0);
+  assert.ok(model.estimatedInvoiceReductionPercent > 0);
   assert.equal(model.roofPhotoDataUrl, "data:image/png;base64,telhado");
   assert.ok(model.solarCoveragePercent > 90);
   assert.ok(model.tenYearSavings > model.annualSavings * 10);

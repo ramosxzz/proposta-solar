@@ -185,6 +185,10 @@
                 <span>Vendedor: <b data-bind="responsibleName">Responsável</b></span>
                 <span>Data: <b data-bind="issuedAt">--/--/----</b></span>
               </section>
+              <section class="cover-system-summary">
+                <div><span>Potência do sistema</span><strong><b data-bind-number="systemPowerLimitKwp" data-digits="2">0,00</b> kWp</strong><small>menor potência entre módulos e inversor</small></div>
+                <div><span>Validade da proposta</span><strong data-bind="validUntil">--/--/----</strong><small data-bind="validityDistributorLabel">conforme distribuidora</small></div>
+              </section>
             </article>
 
             <article class="proposal-page reference-page benefits-page">
@@ -193,6 +197,12 @@
                 <article><span class="benefit-pictogram shield"></span><strong>Vida útil longa</strong><p>Um painel solar tem vida útil de no <b>mínimo <span data-bind="moduleWarrantyLabel">25 anos</span>.</b></p></article>
                 <article><span class="benefit-pictogram coin"></span><strong>Payback curto</strong><p>Uma usina de energia solar costuma <b>se pagar entre 2 a 5 anos.</b></p></article>
                 <article><span class="benefit-pictogram house"></span><strong>Valorização do imóvel</strong><p>O valor do imóvel é maior pela <b>economia na conta de energia</b></p></article>
+              </section>
+              <section class="social-proof">
+                <div><span>Prova social</span><h3>Clientes que já geram economia</h3></div>
+                <article><strong>Residencial</strong><p>Sistema conectado à rede, economia mensal e monitoramento de geração.</p></article>
+                <article><strong>Comercial</strong><p>Projetos dimensionados para reduzir custo fixo e proteger contra reajustes.</p></article>
+                <article><strong>Rural</strong><p>Energia solar para consumo constante, bombas, equipamentos e operação diária.</p></article>
               </section>
               <h2 class="black-banner" aria-label="FUNCIONAMENTO DO SISTEMA FOTOVOLTAICO ON-GRID">FUNCIONAMENTO DO<br>SISTEMA FOTOVOLTAICO ON-GRID</h2>
               <ol class="reference-flow">
@@ -204,7 +214,7 @@
               <section class="reference-house-wrap">
                 <img class="on-grid-diagram" id="on-grid-diagram" src="./FOTO1.png" alt="Funcionamento do sistema fotovoltaico on-grid">
               </section>
-              <footer class="reference-footer">Página 2 de 6</footer>
+              <footer class="reference-footer">Página 2 de 7</footer>
             </article>
 
             <article class="proposal-page reference-page system-page">
@@ -240,29 +250,36 @@
                 </figure>
               </section>
               <section class="comparison-section">
-                <h3>Gráfico de <b>geração</b> e <strong>Consumo</strong> mensal [kWh]</h3>
+                <h3>Geração solar x consumo mensal [kWh]</h3>
+                <p class="chart-caption"><b>Barras</b> mostram a geração estimada mês a mês. A <strong>linha</strong> mostra o consumo médio da fatura.</p>
                 <div class="system-comparison-chart" id="system-comparison-chart"></div>
               </section>
-              <footer class="reference-footer">Página 3 de 6</footer>
+              <footer class="reference-footer">Página 3 de 7</footer>
             </article>
 
             <article class="proposal-page reference-page self-pay-page">
               <header class="reference-header"><img class="reference-logo" src="./hv-icon.png" data-default-src="./hv-icon.png" alt="Logo da empresa"></header>
-              <section class="self-pay-copy">
-                <h2 aria-label="Investimento que se Paga">Investimento<br>que se Paga</h2>
-                <p>Em poucos anos sua economia<br>cobre todo o valor investido</p>
+              <section class="warranty-payment-copy">
+                <p class="eyebrow">Segurança da proposta</p>
+                <h2>Garantia do sistema</h2>
+                <p>Equipamentos com garantias destacadas em proposta e instalação sujeita à vistoria técnica.</p>
               </section>
-              <div class="year-one-saving">Economia Ano 1<br><strong data-bind-currency="annualSavings">R$ 0,00</strong></div>
-              <svg class="investment-curve" id="investment-curve" viewBox="0 0 520 330" aria-label="Curva de payback em 10 anos" role="img">
-                <path class="curve-soft-fill" d="M52 260 C130 258 196 236 246 195 C304 148 344 88 438 54 L438 260Z"/>
-                <path class="curve-grid" d="M52 70H468M52 134H468M52 198H468M52 260H468"/>
-                <path class="curve-axis" d="M52 40V260H480"/>
-                <path class="curve-line" d="M52 260 C128 258 194 236 246 195 C304 148 344 88 438 54"/>
-                <g class="curve-years"><text x="46" y="306">1</text><text x="92" y="306">2</text><text x="138" y="306">3</text><text x="184" y="306">4</text><text x="230" y="306">5</text><text x="276" y="306">6</text><text x="322" y="306">7</text><text x="368" y="306">8</text><text x="414" y="306">9</text><text x="456" y="306">10</text></g>
-              </svg>
-              <p class="self-pay-note">Simulação baseada na inflação média da energia elétrica e na geração estimada do sistema.</p>
-              <div class="accumulated-pill">Economia acumulada: <strong id="ten-year-savings">R$ 0,00</strong></div>
-              <footer class="reference-footer">Página 4 de 6</footer>
+              <section class="warranty-grid">
+                <article><span>Módulos fotovoltaicos</span><strong data-bind="moduleWarrantyLabel">25 anos</strong><p>Garantia informada para os painéis selecionados.</p></article>
+                <article><span>Inversor</span><strong data-bind="inverterWarrantyLabel">5 anos</strong><p>Garantia conforme modelo preenchido pelo integrador.</p></article>
+                <article><span>Sistema</span><strong>Projeto + instalação</strong><p>Dimensionamento, homologação e configuração conforme escopo contratado.</p></article>
+              </section>
+              <section class="finance-options">
+                <div>
+                  <h3>Bancos parceiros</h3>
+                  <p>Banco do Brasil, Sicredi, Santander, BV, Bradesco e demais instituições conforme análise de crédito.</p>
+                </div>
+                <div>
+                  <h3>Formas de pagamento</h3>
+                  <ul><li>Valor à vista</li><li>Financiamento bancário</li><li>Entrada + parcelas conforme aprovação</li></ul>
+                </div>
+              </section>
+              <footer class="reference-footer">Página 4 de 7</footer>
             </article>
 
             <article class="proposal-page reference-page investment-page">
@@ -279,15 +296,40 @@
                   <tbody id="financial-projection-body"></tbody>
                 </table>
               </section>
+              <section class="payback-estimate-alert">
+                <strong>PAYBACK ESTIMADO</strong>
+                <p>O retorno depende da geração real e do consumo do cliente. Mudanças de hábito, sombreamento, clima, tarifa e regras da distribuidora podem alterar o prazo projetado.</p>
+                <div class="ten-year-payback-summary">Economia acumulada em 10 anos: <b id="ten-year-savings">R$ 0,00</b></div>
+              </section>
               <section class="projection-notes">
                 <strong>NOTAS TÉCNICAS DA PROJEÇÃO:</strong>
                 <p>• Inflação energética considerada: 5% ao ano.</p>
                 <p>• Degradação de geração considerada: 0,5% ao ano.</p>
                 <p>• Os cálculos de economia anual consideram a geração estimada e a tarifa informada, projetadas para o período de 20 anos.</p>
                 <p>• Valores baseados em projeções matemáticas e sujeitos a alterações da concessionária e análise técnica.</p>
-                <p>• O payback é calculado no momento em que o saldo acumulado torna-se positivo.</p>
+                <p>• O payback é estimado e calculado no momento em que o saldo acumulado torna-se positivo.</p>
               </section>
-              <footer class="reference-footer">Página 5 de 6</footer>
+              <footer class="reference-footer">Página 5 de 7</footer>
+            </article>
+
+            <article class="proposal-page reference-page invoice-page">
+              <header class="reference-header"><img class="reference-logo" src="./hv-icon.png" data-default-src="./hv-icon.png" alt="Logo da empresa"></header>
+              <section class="invoice-heading">
+                <p class="eyebrow">Simulação da fatura</p>
+                <h2>Como a conta pode ficar após a compensação</h2>
+                <p>Estimativa mensal calculada com base na fatura enviada, geração prevista e disponibilidade mínima da distribuidora.</p>
+              </section>
+              <section class="invoice-simulation">
+                <article><span>Fatura atual</span><strong data-bind-currency="currentBill">R$ 0,00</strong><small>valor informado na conta enviada</small></article>
+                <article><span>Economia solar estimada</span><strong data-bind-currency="monthlySavings">R$ 0,00</strong><small>crédito econômico mensal estimado</small></article>
+                <article class="invoice-result"><span>Fatura estimada após compensação</span><strong data-bind-currency="estimatedRemainingBill">R$ 0,00</strong><small>mantém custo mínimo/disponibilidade quando aplicável</small></article>
+              </section>
+              <section class="invoice-meter">
+                <div><span style="width: 100%"></span><b>Antes</b></div>
+                <div><span data-bind-style-width="estimatedInvoiceReductionPercent"></span><b>Redução estimada: <strong data-bind-number="estimatedInvoiceReductionPercent" data-digits="0">0</strong>%</b></div>
+              </section>
+              <p class="invoice-note">A simulação não substitui a fatura da concessionária. Valores finais dependem de consumo real, créditos, impostos, disponibilidade, iluminação pública e regras tarifárias vigentes.</p>
+              <footer class="reference-footer">Página 6 de 7</footer>
             </article>
 
             <article class="proposal-page reference-page closing-page">
@@ -298,7 +340,7 @@
                 <p>Com a aprovação desta proposta, seguimos para a vistoria técnica, confirmação dos equipamentos e cronograma de instalação.</p>
               </section>
               <section class="signature-area reference-signatures"><div><span></span><strong data-bind="customerName">Cliente</strong></div><div><span></span><strong data-bind="companyName">Empresa</strong></div></section>
-              <footer class="reference-footer">Página 6 de 6</footer>
+              <footer class="reference-footer">Página 7 de 7</footer>
             </article>
             </div>
           </div>

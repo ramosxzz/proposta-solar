@@ -15,20 +15,26 @@ test("inclui favicon e autoria oficial", async () => {
   assert.match(favicon, /#cf6b38/i);
 });
 
-test("inclui seis paginas no modelo visual da proposta de referencia", async () => {
+test("inclui sete paginas no modelo visual da proposta de referencia", async () => {
   const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
-  assert.equal((html.match(/<article class="proposal-page/g) || []).length, 6);
+  assert.equal((html.match(/<article class="proposal-page/g) || []).length, 7);
   assert.match(html, /alt="Proposta comercial energia solar"/);
+  assert.match(html, /Potência do sistema/);
+  assert.match(html, /Validade da proposta/);
   assert.match(html, /FUNCIONAMENTO DO\s+SISTEMA FOTOVOLTAICO ON-GRID/);
+  assert.match(html, /Clientes que já geram economia/);
   assert.match(html, /SEU SISTEMA/);
+  assert.match(html, /id="system-comparison-chart"/);
   assert.match(html, /Garantia dos módulos/);
   assert.match(html, /Garantia do inversor/);
+  assert.match(html, /Garantia do sistema/);
+  assert.match(html, /Bancos parceiros/);
+  assert.match(html, /Formas de pagamento/);
   assert.match(html, /id="module-count"/);
   assert.match(html, /Quantidade de módulos/);
   assert.match(html, /id="roof-photo"/);
   assert.match(html, /Foto do telhado do cliente/);
-  assert.match(html, /Investimento que se Paga/);
   assert.match(html, /PROPOSTA DE INVESTIMENTO/);
   assert.match(html, /PROPOSTA PRONTA/);
   assert.match(html, /src="\.\/cover-solar-template\.png"/);
@@ -43,16 +49,16 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /class="roof-photo-frame"/);
   assert.match(html, /id="roof-photo-image"/);
   assert.match(html, /id="roof-photo-placeholder"/);
-  assert.match(html, /id="investment-curve"/);
-  assert.match(html, /class="curve-axis"/);
-  assert.match(html, /class="curve-soft-fill"/);
-  assert.doesNotMatch(html, /class="curve-bg-arrow"/);
   assert.match(html, /id="financial-projection-body"/);
+  assert.match(html, /PAYBACK ESTIMADO/);
+  assert.match(html, /depende da geração real e do consumo/);
+  assert.match(html, /Simulação da fatura/);
+  assert.match(html, /Fatura estimada após compensação/);
   assert.doesNotMatch(html, /class="money-icon"/);
   assert.match(html, /id="ten-year-savings"/);
   assert.match(html, /5% ao ano/);
   assert.match(html, /0,5% ao ano/);
-  assert.match(html, /Página 6 de 6/);
+  assert.match(html, /Página 7 de 7/);
   assert.doesNotMatch(html, /class="page-rail"/);
   assert.doesNotMatch(html, /class="blue-corners"/);
 });
@@ -85,5 +91,7 @@ test("renderiza payback com linha imediata e grafico comparativo", async () => {
   assert.match(app, /is-payback-year/);
   assert.match(app, /ten-year-savings/);
   assert.match(app, /system-comparison-chart/);
+  assert.match(app, /createElementNS/);
+  assert.match(app, /consumption-line/);
   assert.match(app, /formatCurrency/);
 });

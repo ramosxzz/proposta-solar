@@ -1,4 +1,5 @@
 import { createFinancialProjection } from "./financial-projection.js";
+import { parseInverterKw } from "./solar-calculator.js";
 
 const MONTH_LABELS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 const MONTH_DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -16,6 +17,21 @@ export const formatNumber = (value, digits = 1) => new Intl.NumberFormat("pt-BR"
 function warrantyLabel(value) {
   const years = Math.max(1, Math.round(Number(value) || 0));
   return `${years} ${years === 1 ? "ano" : "anos"}`;
+}
+
+function normalizeText(value) {
+  return String(value ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function proposalValidityDays(distributor) {
+  const text = normalizeText(distributor);
+  if (text.includes("equatorial")) return 7;
+  if (text.includes("neoenergia") || text.includes("celesc") || text.includes("copel")) return 7;
+  if (text.includes("rge") || text.includes("cpfl") || text.includes("ceee")) return 10;
+  return 10;
 }
 
 export function createProposalModel({
@@ -55,11 +71,26 @@ export function createProposalModel({
     : 0;
   const resolvedModuleWarrantyYears = Number(moduleWarrantyYears ?? settings.moduleWarrantyYears ?? 25);
   const resolvedInverterWarrantyYears = Number(inverterWarrantyYears ?? settings.inverterWarrantyYears ?? 5);
+  const inverterPowerKwp = parseInverterKw(inverterModel);
+  const systemPowerLimitKwp = Math.min(system.installedPowerKwp, inverterPowerKwp ?? system.installedPowerKwp);
+  const proposalValidityDaysValue = proposalValidityDays(bill.distributor);
+  const validUntilDate = new Date(issuedAt.getTime() + proposalValidityDaysValue * 86400000);
+  const effectiveEnergyTariff = Number(bill.effectiveEnergyTariff)
+    || (Number(bill.energySubtotal) > 0 && Number(bill.currentConsumptionKwh) > 0
+      ? Number(bill.energySubtotal) / Number(bill.currentConsumptionKwh)
+      : 0);
+  const minimumEnergyBill = (Number(system.availabilityKwh) || 0) * effectiveEnergyTariff;
+  const estimatedRemainingBill = Math.max(minimumEnergyBill, Number(bill.billTotal || 0) - system.monthlySavings);
+  const estimatedInvoiceReductionPercent = Number(bill.billTotal) > 0
+    ? Math.max(0, Math.min(100, ((Number(bill.billTotal) - estimatedRemainingBill) / Number(bill.billTotal)) * 100))
+    : 0;
 
   return {
     proposalCode: `${dateCode}-${customerCode || "SOLAR"}`,
     issuedAt: issuedAt.toLocaleDateString("pt-BR"),
-    validUntil: new Date(issuedAt.getTime() + 10 * 86400000).toLocaleDateString("pt-BR"),
+    validUntil: validUntilDate.toLocaleDateString("pt-BR"),
+    proposalValidityDays: proposalValidityDaysValue,
+    validityDistributorLabel: bill.distributor ? `conforme ${bill.distributor}` : "conforme distribuidora",
     customerName: bill.customerName,
     address: bill.address,
     cityState: [bill.city, bill.state].filter(Boolean).join(" - "),
@@ -70,12 +101,14 @@ export function createProposalModel({
     modulePowerWp: system.modulePowerWp,
     moduleCount: system.moduleCount,
     inverterModel,
+    inverterPowerKwp,
     inverterCount: 1,
     moduleWarrantyYears: resolvedModuleWarrantyYears,
     inverterWarrantyYears: resolvedInverterWarrantyYears,
     moduleWarrantyLabel: warrantyLabel(resolvedModuleWarrantyYears),
     inverterWarrantyLabel: warrantyLabel(resolvedInverterWarrantyYears),
     installedPowerKwp: system.installedPowerKwp,
+    systemPowerLimitKwp,
     panelAreaM2: system.moduleCount * 2.82,
     panelEfficiencyPercent: 21.4,
     monthlyGenerationKwh: system.monthlyGenerationKwh,
@@ -85,6 +118,9 @@ export function createProposalModel({
     investment: system.investment,
     monthlySavings: system.monthlySavings,
     annualSavings: system.annualSavings,
+    minimumEnergyBill,
+    estimatedRemainingBill,
+    estimatedInvoiceReductionPercent,
     paybackYears: system.paybackYears,
     financialProjection,
     tenYearSavings,

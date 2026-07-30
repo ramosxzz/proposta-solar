@@ -462,6 +462,52 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   font-weight: 700;
 }
 
+.cover-system-summary {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  bottom: 86px;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.cover-system-summary div {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.74);
+  box-shadow: 0 12px 32px rgba(9,42,86,.12);
+  backdrop-filter: blur(5px);
+}
+
+.cover-system-summary span,
+.cover-system-summary strong,
+.cover-system-summary small {
+  display: block;
+}
+
+.cover-system-summary span {
+  color: #0b3674;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.cover-system-summary strong {
+  margin-top: 5px;
+  color: #05265a;
+  font-size: 25px;
+  line-height: 1;
+}
+
+.cover-system-summary small {
+  margin-top: 6px;
+  color: #51657c;
+  font-size: 10px;
+}
+
 .reference-benefits {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -491,6 +537,54 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   margin: 14px 0 0;
   color: #666;
   font-size: 12px;
+  line-height: 1.35;
+}
+
+.social-proof {
+  margin: 0 0 18px;
+  display: grid;
+  grid-template-columns: 1.05fr repeat(3, 1fr);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.social-proof > div,
+.social-proof article {
+  border-radius: 18px;
+  background: #f5f7fb;
+  padding: 14px 16px;
+}
+
+.social-proof > div {
+  color: white;
+  background: #082b70;
+}
+
+.social-proof span {
+  display: block;
+  color: #ffad1f;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.social-proof h3 {
+  margin: 6px 0 0;
+  font-size: 19px;
+  line-height: 1.05;
+}
+
+.social-proof article strong {
+  display: block;
+  color: #082b70;
+  font-size: 14px;
+}
+
+.social-proof article p {
+  margin: 6px 0 0;
+  color: #58646f;
+  font-size: 9.5px;
   line-height: 1.35;
 }
 
@@ -730,6 +824,92 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 .system-month b { left: 0; color: #4caf50; }
 .system-month em { right: 0; color: #ff3b32; }
 
+.chart-caption {
+  margin: -14px 0 16px;
+  color: #66726e;
+  text-align: center;
+  font-size: 12px;
+}
+
+.chart-caption b { color: #1f8f53; }
+.chart-caption strong { color: #0b3d86; }
+
+.system-comparison-chart {
+  height: 214px;
+  display: block;
+}
+
+.chart-svg {
+  width: 100%;
+  height: 186px;
+  overflow: visible;
+}
+
+.chart-grid line {
+  stroke: #dbe2df;
+  stroke-width: 1;
+}
+
+.generation-bar-svg {
+  fill: #31a968;
+}
+
+.consumption-line {
+  fill: none;
+  stroke: #0b3d86;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.consumption-point {
+  fill: #fff;
+  stroke: #0b3d86;
+  stroke-width: 3;
+}
+
+.chart-month-label,
+.chart-value-label {
+  text-anchor: middle;
+  font-family: "Geist Mono", monospace;
+}
+
+.chart-month-label {
+  fill: #6b7471;
+  font-size: 10px;
+}
+
+.chart-value-label {
+  fill: #1f8f53;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  color: #4e5955;
+  font-size: 11px;
+}
+
+.chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.chart-legend i,
+.chart-legend b {
+  width: 20px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 999px;
+}
+
+.chart-legend i { background: #31a968; }
+.chart-legend b { background: #0b3d86; height: 4px; }
+
 .self-pay-copy {
   margin: 35px 0 0 56px;
   max-width: 650px;
@@ -833,6 +1013,102 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
 
 .accumulated-pill strong { margin-left: 10px; font-weight: 500; }
 
+.warranty-payment-copy {
+  margin: 42px 0 0 54px;
+  max-width: 620px;
+}
+
+.warranty-payment-copy h2 {
+  margin: 0;
+  color: #125d93;
+  font-size: 68px;
+  line-height: .98;
+  letter-spacing: -.055em;
+  font-weight: 850;
+}
+
+.warranty-payment-copy p:not(.eyebrow) {
+  margin: 16px 0 0;
+  color: #66726e;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.warranty-grid {
+  margin: 54px 36px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.warranty-grid article {
+  min-height: 170px;
+  padding: 22px;
+  border-radius: 22px;
+  color: white;
+  background: linear-gradient(145deg, #09295e, #0d448b);
+}
+
+.warranty-grid span,
+.warranty-grid strong,
+.warranty-grid p {
+  display: block;
+}
+
+.warranty-grid span {
+  color: #ffbd4a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.warranty-grid strong {
+  margin: 12px 0;
+  font-size: 24px;
+  line-height: 1.05;
+}
+
+.warranty-grid p {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.finance-options {
+  margin: 42px 36px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.finance-options > div {
+  min-height: 174px;
+  padding: 24px 26px;
+  border-radius: 24px;
+  background: #f5f7fb;
+  box-shadow: inset 0 0 0 1px rgba(8,43,112,.07);
+}
+
+.finance-options h3 {
+  margin: 0 0 12px;
+  color: #082b70;
+  font-size: 26px;
+}
+
+.finance-options p,
+.finance-options li {
+  color: #5e6b66;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.finance-options ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
 .investment-title {
   margin: 42px 0 24px;
   font-size: 45px;
@@ -921,6 +1197,155 @@ legend { padding: 0 18px 0 0; font-size: 15px; font-weight: 650; letter-spacing:
   margin: 2px 0;
   color: #747474;
   font: 400 7px/1.2 "Geist", sans-serif;
+}
+
+.payback-estimate-alert {
+  margin-top: 14px;
+  padding: 13px 16px;
+  border-radius: 14px;
+  color: #082b70;
+  background: #fff5dc;
+  box-shadow: inset 0 0 0 1px rgba(255,173,31,.35);
+}
+
+.payback-estimate-alert strong {
+  display: block;
+  color: #b46a00;
+  font-size: 12px;
+  letter-spacing: .1em;
+}
+
+.payback-estimate-alert p {
+  margin: 5px 0 0;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.ten-year-payback-summary {
+  margin-top: 8px;
+  color: #082b70;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ten-year-payback-summary b {
+  color: #0f8a4b;
+}
+
+.invoice-heading {
+  margin: 62px 40px 0;
+}
+
+.invoice-heading h2 {
+  margin: 0;
+  max-width: 610px;
+  color: #125d93;
+  font-size: 58px;
+  line-height: 1;
+  letter-spacing: -.055em;
+}
+
+.invoice-heading p:not(.eyebrow) {
+  max-width: 590px;
+  margin: 18px 0 0;
+  color: #66726e;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.invoice-simulation {
+  margin: 56px 40px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.invoice-simulation article {
+  min-height: 190px;
+  padding: 24px;
+  border-radius: 24px;
+  background: #f5f7fb;
+  box-shadow: inset 0 0 0 1px rgba(8,43,112,.07);
+}
+
+.invoice-simulation .invoice-result {
+  color: white;
+  background: linear-gradient(145deg, #09295e, #0d448b);
+}
+
+.invoice-simulation span,
+.invoice-simulation strong,
+.invoice-simulation small {
+  display: block;
+}
+
+.invoice-simulation span {
+  color: #6b7471;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.invoice-simulation strong {
+  margin: 18px 0 12px;
+  color: #082b70;
+  font-size: 31px;
+  line-height: 1;
+}
+
+.invoice-simulation small {
+  color: #66726e;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.invoice-result span,
+.invoice-result small {
+  color: rgba(255,255,255,.72);
+}
+
+.invoice-result strong {
+  color: white;
+}
+
+.invoice-meter {
+  margin: 54px 40px 0;
+  display: grid;
+  gap: 18px;
+}
+
+.invoice-meter div {
+  height: 42px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8edf2;
+}
+
+.invoice-meter span {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ffad1f, #31a968);
+}
+
+.invoice-meter b {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: #082b70;
+  font-size: 14px;
+}
+
+.invoice-note {
+  margin: 44px 40px 0;
+  color: #66726e;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .trophy {
