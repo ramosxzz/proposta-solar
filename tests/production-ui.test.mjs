@@ -32,6 +32,7 @@ test("inclui seis paginas no modelo visual da proposta de referencia", async () 
   assert.match(html, /src="\.\/foto2\.png"/);
   assert.match(html, /class="cover-client-reference"/);
   assert.match(html, /src="\.\/hv-icon\.png"/);
+  assert.match(html, /data-default-src="\.\/hv-icon\.png"/);
   assert.match(html, /class="reference-logo"/);
   assert.match(html, /src="\.\/FOTO1\.png"/);
   assert.match(html, /id="on-grid-diagram"/);
@@ -72,6 +73,9 @@ test("renderiza payback com linha imediata e grafico comparativo", async () => {
 
   assert.match(app, /roofPhotoDataUrl/);
   assert.match(app, /function renderRoofPhoto/);
+  assert.match(app, /function renderReferenceLogos/);
+  assert.match(app, /reference-logo/);
+  assert.match(app, /logoDataUrl/);
   assert.match(app, /function renderFinancialProjection/);
   assert.match(app, /financialProjection\.rows/);
   assert.match(app, /Imediato/);

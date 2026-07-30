@@ -235,12 +235,22 @@ function renderProposal() {
   }
   if (brandMark) brandMark.hidden = Boolean(model.logoDataUrl);
 
+  renderReferenceLogos();
   renderRoofPhoto();
   renderConsumptionChart();
   renderGenerationChart();
   renderSystemComparisonChart();
   renderFinancialProjection();
   fitProposalPreview();
+}
+
+function renderReferenceLogos() {
+  const logoDataUrl = state.proposal.logoDataUrl;
+  for (const logo of $$(".reference-logo")) {
+    logo.src = logoDataUrl || logo.dataset.defaultSrc || "./hv-icon.png";
+    logo.classList.toggle("is-custom-logo", Boolean(logoDataUrl));
+    logo.classList.toggle("is-default-logo", !logoDataUrl);
+  }
 }
 
 function renderRoofPhoto() {
